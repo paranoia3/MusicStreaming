@@ -1,0 +1,128 @@
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background: #0d074d;
+}
+
+a {
+    color: #f9418b;
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+.container {
+    width: min(1000px, 92%);
+    margin: 0 auto;
+}
+
+#top-banner {
+    background: #f9418b;
+    color: #111;
+    text-align: center;
+    padding: 8px 12px;
+    font-weight: bold;
+}
+
+.header {
+    border-bottom: 1px solid rgba(249,65,139,0.45);
+    padding: 10px 0;
+}
+
+.logo { margin: 0 0 6px; }
+
+.nav a {
+    margin-right: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: #e9e4c6;
+}
+.nav a.active,
+.nav a:hover {
+    background: #f9418b;
+    color: #111;
+}
+
+.section {
+    padding: 20px 0;
+    border-top: 1px solid rgba(249,65,139,0.45);
+}
+.section.light {
+    background: rgba(249,65,139,0.08);
+}
+
+.muted { color: #e9e4c6; }
+
+.btn {
+    display: inline-block;
+    background: #f9418b;
+    color: #111;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+}
+.btn.outline {
+    background: transparent;
+    color: #f9418b;
+    border: 2px solid #f9418b;
+}
+
+.cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(249,65,139,0.12);
+    border: 1px solid rgba(249,65,139,0.45);
+    border-radius: 10px;
+    padding: 12px;
+    width: 300px;
+}
+
+.cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 8px;
+    border: 3px solid #f9418b;
+}
+
+.form {
+    background: rgba(249,65,139,0.10);
+    border: 1px solid rgba(249,65,139,0.45);
+    border-radius: 10px;
+    padding: 12px;
+    max-width: 480px;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(249,65,139,0.45);
+    background: #1a1360;
+    color: #fff;
+}
+
+.footer {
+    border-top: 1px solid rgba(249,65,139,0.45);
+    background: rgba(249,65,139,0.08);
+    padding: 12px 0;
+    text-align: center;
+    margin-top: 20px;
+}
