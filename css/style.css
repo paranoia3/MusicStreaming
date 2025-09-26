@@ -72,7 +72,7 @@ a:hover { text-decoration: underline; }
 
 .cards {
     display: flex;
-    gap: 12px;
+    gap: 40px;
     flex-wrap: wrap;
 }
 
