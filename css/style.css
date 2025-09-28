@@ -18,6 +18,24 @@ a:hover { text-decoration: underline; }
     margin: 0 auto;
 }
 
+.highlight{
+    position: relative;
+    padding-left: 15px;
+    color: white;
+    display: inline-block;
+}
+
+.highlight:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background-color: #f9418b;
+    border-radius: 3px;
+}
+
 #top-banner {
     background: #f9418b;
     color: #111;
@@ -36,14 +54,16 @@ a:hover { text-decoration: underline; }
 .logo {
     padding-bottom: 10px;
     font-family: algerian;
+
 }
 
 .nav a {
     margin-right: 12px;
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 12px 12px;
+    border-radius: 10px;
     color: #ffff;
     background: #F9418B72;
+    border: 2px solid #f9418b;
 }
 .nav a.active,
 .nav a:hover {
@@ -53,19 +73,35 @@ a:hover { text-decoration: underline; }
     cursor: pointer;
 }
 
+.login a{
+    float: right;
+    background: #F9418B72;
+    color: #fff;
+    margin-right: 15px;
+    border-radius: 10px;
+    padding: 12px 12px;
+    margin-top: -30px;
+    border: 2px solid #f9418b;
+}
+.login a:hover{
+    background: #f9418b;
+    text-decoration: none;
+}
+
+
 .section {
     padding: 20px 0;
-    border-top: 1px solid rgba(249,65,139,0.45);
+    border-top: 1px solid #F9418B72;
 }
 .section.light {
-    background: rgba(249,65,139,0.08);
+    background: #F9418B14;
 }
 
 .muted { color: #ffff; }
 
 .btn {
     display: inline-block;
-    background: #f9418b;
+    background: #F9418B72;
     color: #ffff;
     padding: 8px 12px;
     border-radius: 8px;
@@ -85,6 +121,7 @@ a:hover { text-decoration: underline; }
     text-decoration: none;
     transform: translateY(-3px);
     transition: transform .2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cards {
@@ -103,6 +140,7 @@ a:hover { text-decoration: underline; }
 .card:hover {
     transform: translateY(-5px);
     transition: transform .2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cover {
@@ -173,15 +211,13 @@ a:hover { text-decoration: underline; }
     text-decoration: none;
     transform: scale(1.08);
     transition: transform .2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.account {
-    width: 60px;
-    height: 60px;
+.account-avatar {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin-left: 100px;
-    border: 2px solid #f9418b;
-    float: right;
+    border: 3px solid #f9418b;
+    margin-right: 10px;
 }
