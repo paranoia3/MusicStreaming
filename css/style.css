@@ -16,6 +16,7 @@ a:hover { text-decoration: underline; }
 .container {
     width: min(1000px, 92%);
     margin: 0 auto;
+    display: grid;
 }
 
 .highlight{
@@ -58,12 +59,10 @@ a:hover { text-decoration: underline; }
 }
 
 .nav a {
-    margin-right: 12px;
+    margin: 12px;
     padding: 12px 12px;
     border-radius: 10px;
     color: #ffff;
-    background: #F9418B72;
-    border: 2px solid #f9418b;
 }
 .nav a.active,
 .nav a:hover {
@@ -184,6 +183,7 @@ a:hover { text-decoration: underline; }
     padding: 12px 0;
     text-align: left;
     margin-top: 20px;
+    font-size: 10px;
 }
 
 .subscription {
