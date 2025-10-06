@@ -250,3 +250,128 @@ h2 {
     border-color: var(--text-secondary);
     box-shadow: none;
 }
+
+@media (max-width: 992px) {
+    .main-container {
+        grid-template-columns: 200px 1fr;
+    }
+
+    .track-list-item {
+        grid-template-columns: 50px 1fr 100px;
+    }
+
+    .track-album {
+        display: none;
+    }
+
+    .profile-header .avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-info h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .main-content {
+        padding: 15px;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        grid-row: 2;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 5px 0;
+        border-top: 1px solid var(--hover-color);
+        height: 60px;
+    }
+
+    .sidebar .logo,
+    .sidebar .profile-preview {
+        display: none;
+    }
+
+    .sidebar nav {
+        width: 100%;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        flex-grow: 0;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 0;
+        flex: 1;
+    }
+
+    .sidebar nav ul li a {
+        flex-direction: column;
+        justify-content: center;
+        font-size: 0.7rem;
+        padding: 5px;
+        height: 100%;
+    }
+
+    .sidebar nav ul li a .icon {
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .profile-header .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-info h1 {
+        font-size: 2rem;
+    }
+
+    .profile-stats {
+        justify-content: center;
+    }
+
+    .track-list-item {
+        grid-template-columns: 45px 1fr 80px;
+        padding: 8px 10px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+
+    .track-list-item {
+        grid-template-columns: 45px 1fr;
+    }
+
+    .track-duration {
+        display: none;
+    }
+
+    .search-bar {
+        font-size: 0.9rem;
+    }
+}
