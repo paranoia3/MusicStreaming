@@ -62,7 +62,7 @@ body {
     align-items: center;
     padding: 10px;
     border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .sidebar nav ul li a .icon {
@@ -105,12 +105,14 @@ body {
     background-color: var(--card-color);
     border: none;
     border-radius: 12px;
-    transition: background-color 0.3s;
+    transition: background-color 0.8s;
     overflow: hidden;
 }
 
 .card:hover {
     background-color: var(--hover-color);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)    ;
 }
 
 .card-img-top {
