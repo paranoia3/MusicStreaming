@@ -94,7 +94,6 @@ body {
     font-weight: bold;
 }
 
-
 .main-content {
     background-color: var(--background-color);
     overflow-y: auto;
@@ -112,7 +111,7 @@ body {
 .card:hover {
     background-color: var(--hover-color);
     transform: translateY(-4px);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)    ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-img-top {
@@ -227,6 +226,7 @@ h2 {
     padding: 25px;
     border-radius: 12px;
 }
+
 .settings-section h3 {
     margin-top: 0;
     margin-bottom: 20px;
