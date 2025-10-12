@@ -7,81 +7,94 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/piano-grand.png">
-  <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-<div class="main-container">
-  <aside class="sidebar">
-    <div class="logo">AITUMusic</div>
-    <nav>
-      <ul>
-        <li><a href="index.html"><i class="icon" data-feather="home"></i>Home</a></li>
-        <li><a href="explore.html" ><i class="icon" data-feather="compass"></i>Explore</a></li>
-        <li><a href="playlists.html"><i class="icon" data-feather="music"></i>Playlist</a></li>
-        <li><a href="search.html"><i class="icon" data-feather="search"></i>Search</a></li>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="index.html">AITUMusic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="playlists.html">Playlists</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+        <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
       </ul>
-    </nav>
-    <div class="profile-preview">
-      <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none">
-        <img src="https://placehold.co/100x100/6B0F9C/FFFFFF?text=A" alt="Avatar">
-        <span class="profile-name ms-2">Ariana</span>
-      </a>
-      <a href="settings.html" class="ms-auto text-secondary"><i data-feather="settings"></i></a>
-    </div>
-  </aside>
-
-  <main class="main-content">
-    <div class="container-fluid">
-      <h1>Settings</h1>
-
-      <div class="row g-4 mt-3">
-        <div class="col-lg-8">
-          <section class="settings-section">
-            <h3>Account</h3>
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="ariana.@example.com">
-              </div>
-              <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" value="Ariana Mendes">
-              </div>
-              <button type="submit" class="btn" style="background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple)); color: white;">Save</button>
-            </form>
-          </section>
-
-          <section class="settings-section mt-4">
-            <h3>Playback</h3>
-            <form>
-              <div class="mb-3">
-                <label for="quality" class="form-label">Sound quality</label>
-                <select class="form-select" id="quality">
-                  <option>Auto</option>
-                  <option>Low</option>
-                  <option>Mid</option>
-                  <option selected>High</option>
-                </select>
-              </div>
-              <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" role="switch" id="crossfade" checked>
-                <label class="form-check-label" for="crossfade">Smooth transition</label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="autoplay">
-                <label class="form-check-label" for="autoplay">Autoplay</label>
-              </div>
-            </form>
-          </section>
-        </div>
+      <div class="d-flex align-items-center">
+        <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none me-3">
+          <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Аватар" class="rounded-circle">
+          <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
+        </a>
+        <a href="settings.html" class="text-secondary"><i data-feather="settings"></i></a>
       </div>
-
     </div>
-  </main>
-</div>
+  </div>
+</nav>
 
+<main class="container-fluid p-3 p-sm-4 p-md-5">
+  <h1>Settings</h1>
+  <div class="row g-5 mt-3 justify-content-center">
+    <div class="col-lg-8">
+      <section class="settings-section">
+        <h3>Account</h3>
+        <form>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="ariana.@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label">User name</label>
+            <input type="text" class="form-control" id="username" value="Ariana Mendes">
+          </div>
+          <button type="submit" class="btn btn-gradient">Save changes</button>
+        </form>
+      </section>
+
+      <section class="settings-section mt-4">
+        <h3>Playback</h3>
+        <form>
+          <div class="mb-3">
+            <label for="quality" class="form-label">Sound quality</label>
+            <select class="form-select" id="quality">
+              <option>Auto</option>
+              <option>Low</option>
+              <option>Mid</option>
+              <option selected>High</option>
+            </select>
+          </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="crossfade" checked>
+            <label class="form-check-label" for="crossfade">Smooth transition</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="autoplay">
+            <label class="form-check-label" for="autoplay">Autoplay</label>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-black text-secondary text-center p-4 mt-auto">
+  <div class="footer-info">
+    <p class="mb-0">&copy; 2025 Yerkegali Yergali, Dameli Taubasar, Begimzhan Bitore</p>
+    <button id="change-bg-btn" class="btn btn-sm btn-outline-secondary">Change background</button>
+    <div id="datetime-display" class="datetime-display"></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-  feather.replace()
+  feather.replace();
 </script>
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -7,120 +7,120 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/piano-grand.png">
-  <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-<div class="main-container">
-  <aside class="sidebar">
-    <div class="logo">AITUMusic</div>
-    <nav>
-      <ul>
-        <li><a href="index.html"><i class="icon" data-feather="home"></i>Home</a></li>
-        <li><a href="explore.html" class="active"><i class="icon" data-feather="compass"></i>Explore</a></li>
-        <li><a href="playlists.html"><i class="icon" data-feather="music"></i>Playlist</a></li>
-        <li><a href="search.html"><i class="icon" data-feather="search"></i>Search</a></li>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="index.html">AITUMusic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="playlists.html">Playlists</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+        <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
       </ul>
-    </nav>
-    <div class="profile-preview">
-      <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none">
-        <img src="https://placehold.co/100x100/6B0F9C/FFFFFF?text=A" alt="Avatar">
-        <span class="profile-name ms-2">Ariana</span>
-      </a>
-      <a href="settings.html" class="ms-auto text-secondary"><i data-feather="settings"></i></a>
+      <div class="d-flex align-items-center">
+        <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none me-3">
+          <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Аватар" class="rounded-circle">
+          <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
+        </a>
+        <a href="settings.html" class="text-secondary"><i data-feather="settings"></i></a>
+      </div>
     </div>
-  </aside>
+  </div>
+</nav>
 
-  <main class="main-content">
-    <div class="container-fluid">
-      <h1>Explore</h1>
-      <p class="text-secondary">Discover new music.</p>
+<main class="container-fluid p-3 p-sm-4 p-md-5">
+  <h1>Explore</h1>
+  <p class="text-secondary">Discover new music.</p>
 
-      <section class="mt-5">
-        <h2>New releases</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
-          <div class="col">
-            <div class="card h-100">
-              <img src="images/dua_lipa_levitating.jpeg" class="card-img-top" alt="New release">
-              <div class="card-body">
-                <h5 class="card-title">Future Nostalgia</h5>
-                <p class="card-text">Dua Lipa</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="images/The_Weeknd_-_After_Hours.png" class="card-img-top" alt="New release">
-              <div class="card-body">
-                <h5 class="card-title">After Hours</h5>
-                <p class="card-text">The Weeknd</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="images/Music_of_the_Spheres.jpg" class="card-img-top" alt="New release">
-              <div class="card-body">
-                <h5 class="card-title">Music of the Spheres</h5>
-                <p class="card-text">Coldplay</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="images/Happier-than-ever.jpeg" class="card-img-top" alt="New release">
-              <div class="card-body">
-                <h5 class="card-title">Happier Than Ever</h5>
-                <p class="card-text">Billie Eilish</p>
-              </div>
-            </div>
+  <section class="mt-5">
+    <h2>New releases</h2>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/dua_lipa_levitating.jpeg" class="card-img-top" alt="New releases">
+          <div class="card-body">
+            <h5 class="card-title">Future Nostalgia</h5>
+            <p class="card-text">Dua Lipa</p>
           </div>
         </div>
-      </section>
-
-      <section class="mt-5">
-        <h2>Top charts</h2>
-        <ul class="track-list">
-          <li class="track-list-item">
-            <div class="track-cover">
-              <img src="images/The_Weeknd_Blinding_Lights.jpeg" alt="Track">
-            </div>
-            <div class="track-info">
-              <div class="track-title">Blinding Lights</div>
-              <div class="track-artist">The Weeknd</div>
-            </div>
-            <div class="track-album">After Hours</div>
-            <div class="track-duration">3:20</div>
-          </li>
-          <li class="track-list-item">
-            <div class="track-cover">
-              <img src="images/as-it-was.jpeg" alt="Track">
-            </div>
-            <div class="track-info">
-              <div class="track-title">As It Was</div>
-              <div class="track-artist">Harry Styles</div>
-            </div>
-            <div class="track-album">Harry's House</div>
-            <div class="track-duration">2:47</div>
-          </li>
-          <li class="track-list-item">
-            <div class="track-cover">
-              <img src="images/Someone_You_Loved.png" alt="Track">
-            </div>
-            <div class="track-info">
-              <div class="track-title">Someone You Loved</div>
-              <div class="track-artist">Lewis Capaldi</div>
-            </div>
-            <div class="track-album">Divinely Uninspired...</div>
-            <div class="track-duration">3:02</div>
-          </li>
-        </ul>
-      </section>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/The_Weeknd_-_After_Hours.png" class="card-img-top" alt="New releases">
+          <div class="card-body">
+            <h5 class="card-title">After Hours</h5>
+            <p class="card-text">The Weeknd</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/Coldplay.jpeg" class="card-img-top" alt="New releases">
+          <div class="card-body">
+            <h5 class="card-title">Music of the Spheres</h5>
+            <p class="card-text">Coldplay</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="images/Billie_Eilish_-_Happier_Than_Ever.png" class="card-img-top" alt="New releases">
+          <div class="card-body">
+            <h5 class="card-title">Happier Than Ever</h5>
+            <p class="card-text">Billie Eilish</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
-</div>
+  </section>
 
+  <section class="mt-5">
+    <h2>Top charts</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item track-list-item">
+        <img src="https://placehold.co/50x50/282828/FFFFFF?text=1" class="rounded-2" alt="Track">
+        <div class="track-info">
+          <div class="track-title">Blinding Lights</div>
+          <div class="track-artist">The Weeknd</div>
+        </div>
+        <div class="track-album d-none d-md-block">After Hours</div>
+        <div class="track-duration">3:20</div>
+      </li>
+      <li class="list-group-item track-list-item">
+        <img src="https://placehold.co/50x50/282828/FFFFFF?text=2" class="rounded-2" alt="Track">
+        <div class="track-info">
+          <div class="track-title">As It Was</div>
+          <div class="track-artist">Harry Styles</div>
+        </div>
+        <div class="track-album d-none d-md-block">Harry's House</div>
+        <div class="track-duration">2:47</div>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer class="bg-black text-secondary text-center p-4 mt-auto">
+  <div class="footer-info">
+    <p class="mb-0">&copy; 2025 Yerkegali Yergali, Dameli Taubasar, Begimzhan Bitore</p>
+    <button id="change-bg-btn" class="btn btn-sm btn-outline-secondary">Change background</button>
+    <div id="datetime-display" class="datetime-display"></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-  feather.replace()
+  feather.replace();
 </script>
+<script src="js/main.js"></script>
 </body>
 </html>

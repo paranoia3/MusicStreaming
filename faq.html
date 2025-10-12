@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playlists - AITUMusic</title>
+  <title>FAQ - AITUMusic</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/piano-grand.png">
@@ -20,9 +20,9 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="playlists.html">Playlists</a></li>
+        <li class="nav-item"><a class="nav-link" href="playlists.html">Playlist</a></li>
         <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
-        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="faq.html">FAQ</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
         <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
       </ul>
@@ -38,55 +38,55 @@
 </nav>
 
 <main class="container-fluid p-3 p-sm-4 p-md-5">
-  <h1>Your playlists</h1>
+  <h1>Frequently Asked Questions</h1>
+  <p class="text-secondary">Find answers to your questions here.</p>
 
-  <section class="mt-5">
-    <h2>Playlists</h2>
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://placehold.co/200x200/B91372/FFFFFF?text=Chill" class="card-img-top" alt="Playlist">
-          <div class="card-body">
-            <h5 class="card-title">Chill</h5>
-            <p class="card-text">25 tracks</p>
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-8">
+      <div class="accordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>How do I cancel my subscription?</h3>
+            <i data-feather="chevron-down" class="accordion-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>You can cancel your subscription at any time in your profile settings. Go to the "Subscription" section and follow the on-screen instructions.</p>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://placehold.co/200x200/6B0F9C/FFFFFF?text=Workout" class="card-img-top" alt="Playlist">
-          <div class="card-body">
-            <h5 class="card-title">Training</h5>
-            <p class="card-text">50 tracks</p>
+        <!-- Question 2 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>Is it possible to download tracks?</h3>
+            <i data-feather="chevron-down" class="accordion-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Yes, with an AITUMusic Premium subscription you can download an unlimited number of tracks and listen to them offline.</p>
+          </div>
+        </div>
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>What devices is the service available on?</h3>
+            <i data-feather="chevron-down" class="accordion-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>AITUMusic is available on smartphones (iOS and Android), tablets, computers via a web browser, as well as smart speakers and TVs.</p>
+          </div>
+        </div>
+        <!-- Question 4 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h3>What is a family subscription?</h3>
+            <i data-feather="chevron-down" class="accordion-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>A family subscription allows you and up to five family members to enjoy all the benefits of Premium for one great price. Each member will have their own separate account.</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="mt-5">
-    <h2>Liked teacks</h2>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item track-list-item">
-        <img src="https://placehold.co/50x50/282828/FFFFFF?text=1" class="rounded-2" alt="Track">
-        <div class="track-info">
-          <div class="track-title">Stressed Out</div>
-          <div class="track-artist">Twenty One Pilots</div>
-        </div>
-        <div class="track-album d-none d-md-block">Blurryface</div>
-        <div class="track-duration">3:22</div>
-      </li>
-      <li class="list-group-item track-list-item">
-        <img src="https://placehold.co/50x50/282828/FFFFFF?text=2" class="rounded-2" alt="Track">
-        <div class="track-info">
-          <div class="track-title">Radioactive</div>
-          <div class="track-artist">Imagine Dragons</div>
-        </div>
-        <div class="track-album d-none d-md-block">Night Visions</div>
-        <div class="track-duration">3:06</div>
-      </li>
-    </ul>
-  </section>
+  </div>
 </main>
 
 <footer class="bg-black text-secondary text-center p-4 mt-auto">

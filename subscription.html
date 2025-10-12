@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription - AITUMusic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/piano-grand.png">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="index.html">AITUMusic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="playlists.html">Playlists</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="subscription.html">Subscription</a></li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none me-3">
+          <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Аватар" class="rounded-circle">
+          <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
+        </a>
+        <a href="settings.html" class="text-secondary"><i data-feather="settings"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container-fluid p-3 p-sm-4 p-md-5 text-center">
+  <h1>Choose your plan</h1>
+  <p class="text-secondary">Listen without limits with an AITUMusic Premium subscription.</p>
+
+  <div class="row mt-5 justify-content-center g-4">
+    <!-- Plan 1: Free -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <div class="card-header"><h3>Free</h3></div>
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title">0 ₸<small class="text-secondary">/month</small></h4>
+          <ul class="list-unstyled mt-3 mb-4 text-start">
+            <li><i data-feather="check" class="text-success"></i> Access to millions of tracks</li>
+            <li><i data-feather="x" class="text-danger"></i> Listening with advertising</li>
+            <li><i data-feather="x" class="text-danger"></i> Online only</li>
+          </ul>
+          <a href="#" class="btn btn-lg btn-outline-light w-100 mt-auto disabled">Your current plan</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100 border-primary">
+        <div class="card-header bg-primary text-white border-primary"><h3>Premium</h3></div>
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title">999 ₸<small class="text-secondary">/month</small></h4>
+          <ul class="list-unstyled mt-3 mb-4 text-start">
+            <li><i data-feather="check" class="text-success"></i> Everything from the free plan</li>
+            <li><i data-feather="check" class="text-success"></i> No Ads</li>
+            <li><i data-feather="check" class="text-success"></i> Downloading tracks</li>
+            <li><i data-feather="check" class="text-success"></i> High sound quality</li>
+          </ul>
+          <a href="#" id="open-popup-btn" class="btn btn-lg btn-primary w-100 mt-auto">Choose Premium</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100">
+        <div class="card-header"><h3>Family</h3></div>
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title">1499 ₸<small class="text-secondary">/month</small></h4>
+          <ul class="list-unstyled mt-3 mb-4 text-start">
+            <li><i data-feather="check" class="text-success"></i> Everything from the Premium plan</li>
+            <li><i data-feather="check" class="text-success"></i> Up to 6 accounts</li>
+            <li><i data-feather="check" class="text-success"></i> Family playlists</li>
+            <li><i data-feather="check" class="text-success"></i> Blocking unwanted content</li>
+          </ul>
+          <a href="#" class="btn btn-lg btn-outline-light w-100 mt-auto">Choose Family</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-black text-secondary text-center p-4 mt-auto">
+  <div class="footer-info">
+    <p class="mb-0">&copy; 2025 Yerkegali Yergali, Dameli Taubasar, Begimzhan Bitore</p>
+    <button id="change-bg-btn" class="btn btn-sm btn-outline-secondary">Change background</button>
+    <div id="datetime-display" class="datetime-display"></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+  feather.replace();
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
