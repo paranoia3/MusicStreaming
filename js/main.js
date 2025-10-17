@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentColorIndex = 0;
 
         changeBgButton.addEventListener('click', () => {
-            currentColorIndex = (currentColorIndex + 1) % colors.length;
+            currentColorIndex = currentColorIndex + 1;
             const newColor = colors[currentColorIndex];
             document.documentElement.style.setProperty('--background-color', newColor);
         });
