@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Object to manage user state (Section 3. Objects and Methods)
     const userState = {
-        name: localStorage.getItem('userName') || 'Listener',
+        name: localStorage.getItem('userName') || 'Ariana',
     };
 
     function determineGreeting() {
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 minute: '2-digit'
             };
             // Modified to show current time more prominently
-            dateTimeDisplay.textContent = now.toLocaleTimeString('en-EN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' (' + now.toLocaleDateString('en-EN', { month: 'short', day: 'numeric'}) + ')';
+            dateTimeDisplay.textContent = now.toLocaleTimeString('en-EN', { hour: '2-digit', minute: '2-digit'}) + ' (' + now.toLocaleDateString('en-EN', { month: 'short', day: 'numeric'}) + ')';
         }
     }
     if (dateTimeDisplay) {
