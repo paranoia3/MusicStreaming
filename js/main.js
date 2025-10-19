@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentColorIndex = 0;
 
         changeBgButton.addEventListener('click', () => {
-            currentColorIndex = currentColorIndex + 1;
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
             const newColor = colors[currentColorIndex];
             document.documentElement.style.setProperty('--background-color', newColor);
         });
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const now = new Date();
             const options = {
                 year: 'numeric',
-                month: 'long',
+                month: 'short',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
