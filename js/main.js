@@ -14,7 +14,6 @@ function showCustomMessage(message, duration = 3000) {
     messageEl.textContent = message;
     messageEl.classList.add('show');
 
-    // Set timeout to hide the message
     setTimeout(() => {
         messageEl.classList.remove('show');
     }, duration);
@@ -22,12 +21,12 @@ function showCustomMessage(message, duration = 3000) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Dynamic Greeting Implementation (Section 1. Manipulating Attributes & 2. Switch Statements)
+    // Dynamic Greeting Implementation
     const greetingDisplay = document.getElementById('greeting-display');
     const nameInput = document.getElementById('user-name-input');
     const nameSubmitButton = document.getElementById('name-submit-btn');
 
-    // Object to manage user state (Section 3. Objects and Methods)
+    // Object to manage user state
     const userState = {
         name: localStorage.getItem('userName') || 'Ariana',
     };
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hour = now.getHours();
         let timeOfDay;
 
-        // Using a switch statement to control logic based on time (Section 2. Switch Statements)
+        // Using a switch statement to control logic based on time
         switch (true) {
             case (hour >= 5 && hour < 12):
                 timeOfDay = "Morning";
@@ -89,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateGreeting();
 
 
-    // Theme Toggle (Section 1. Dynamic Style Changes)
+    // Theme Toggle
     const themeToggleButton = document.getElementById('theme-toggle-btn');
 
     function loadThemePreference() {
@@ -134,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleButton.addEventListener('click', toggleTheme);
     }
 
-    // Star Rating (Section 1. Selecting and Manipulating HTML Elements & 3. Play Sounds)
+    // Star Rating
     const starRatingContainers = document.querySelectorAll('.star-rating');
     const notificationSound = new Audio('https://cdn.jsdelivr.net/gh/Tonejs/Tone.js/examples/audio/pluck.mp3'); // Example sound, use Tone.js for complex sounds if needed
 
@@ -149,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Clear all active classes
                 stars.forEach(s => s.classList.remove('checked'));
 
-                // Apply 'checked' class up to the selected star (DOM Manipulation)
+                // Apply 'checked' class up to the selected star
                 for (let i = 0; i < rating; i++) {
                     stars[i].classList.add('checked');
                 }
@@ -163,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showCustomMessage(`You rated this track/artist ${rating} stars!`);
             });
 
-            // Optional hover effect (purely visual)
+            // Optional hover effect
             container.addEventListener('mouseover', (e) => {
                 if (e.target.classList.contains('star')) {
                     const hoverRating = parseInt(e.target.getAttribute('data-value'));
@@ -179,11 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dynamic Track List Rendering (Section 3. Arrays and Loops & Higher-Order Functions)
+    // Dynamic Track List Rendering
     const dynamicTrackList = document.getElementById('dynamic-track-list');
 
     if (dynamicTrackList) {
-        // Higher-Order Function: filter (example of filtering for 4+ star tracks)
+        // Higher-Order Function: filter
         const highRatedTracks = featuredTracks.filter(track => track.rating >= 4);
 
         // Higher-Order Function: map to create HTML string for each track
@@ -199,12 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
         `).join(''); // Joining the array of HTML strings into one long string
 
-        // Inject the generated HTML into the DOM (Section 1. Modify content)
+        // Inject the generated HTML into the DOM
         dynamicTrackList.innerHTML = trackHtml;
     }
 
 
-    // Keyboard Event Handling (Section 2. Keyboard Event Handling)
+    // Keyboard Event Handling
     const navItems = document.querySelectorAll('#navbarNav .nav-item a');
     let currentFocusIndex = -1;
 
@@ -243,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Form Validation and Submission (Contact Form - Section 2. Callbacks)
+    // Form Validation and Submission
     const contactForm = document.querySelector('#contact-form');
     if (contactForm) {
         // Callback function to handle form submission asynchronously
@@ -265,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('contact-email');
             const subject = document.getElementById('contact-subject');
             const message = document.getElementById('contact-message');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
             // Validate fields
             if (name.value.trim() === '') { isValid = false; showError(name, 'Please enter your name.'); }
@@ -275,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (message.value.trim().length < 10) { isValid = false; showError(message, 'The message must contain at least 10 characters.'); }
 
             if (isValid) {
-                // Simulate asynchronous data submission (e.g., fetch API)
+                // Simulate asynchronous data submission
                 new Promise(resolve => setTimeout(resolve, 500)) // Simulate network delay
                     .then(() => {
                         showCustomMessage('Thank you! Your message has been sent successfully.');
@@ -291,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', handleSubmit);
     }
 
-    // Function for clearing contact form inputs (Section 2. Button Listener)
+    // Function for clearing contact form inputs
     const resetButton = document.querySelector('#contact-form button[type="reset"]');
     if (resetButton) {
         resetButton.addEventListener('click', (e) => {
