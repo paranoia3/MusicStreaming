@@ -151,6 +151,10 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.9;
 }
 
+#contact-submit-btn .spinner-border-sm {
+    margin-right: 5px;
+}
+
 .settings-section {
     background-color: var(--card-color);
     padding: 25px;
@@ -243,7 +247,7 @@ h2 { font-size: 1.5rem; }
     color: var(--accent-purple);
 }
 
-#custom-message {
+#toast-notification {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -252,16 +256,9 @@ h2 { font-size: 1.5rem; }
     padding: 15px 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
     z-index: 1060;
     min-width: 250px;
-}
-#custom-message.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    display: none;
 }
 
 .accordion-item {
@@ -357,4 +354,63 @@ h2 { font-size: 1.5rem; }
     outline: 2px solid var(--accent-purple);
     border-radius: 4px;
     box-shadow: 0 0 0 3px rgba(107, 15, 156, 0.5);
+}
+
+#scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+    z-index: 1055;
+    transition: width 0.1s ease-out;
+    border-bottom-right-radius: 4px;
+}
+
+#autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+#autocomplete-suggestions .list-group-item {
+    background-color: var(--card-color);
+    color: var(--text-primary);
+    border-color: var(--hover-color);
+    cursor: pointer;
+}
+#autocomplete-suggestions .list-group-item:hover {
+    background-color: var(--hover-color);
+}
+
+.highlight {
+    background-color: var(--accent-purple);
+    color: var(--text-primary);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+.light-theme .highlight {
+    background-color: #f7d836;
+    color: var(--text-primary);
+}
+
+#copy-name-btn {
+    padding: 0.25rem 0.5rem;
+}
+#copy-name-btn .feather {
+    width: 16px;
+    height: 16px;
+}
+
+.lazy-load {
+    opacity: 0.5;
+    transition: opacity 0.5s ease-in-out;
+}
+.lazy-load.loaded {
+    opacity: 1;
 }
