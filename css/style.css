@@ -356,7 +356,6 @@ h2 { font-size: 1.5rem; }
     box-shadow: 0 0 0 3px rgba(167, 85, 222, 0.5);
 }
 
-
 #scroll-progress-bar {
     position: fixed;
     top: 0;
@@ -429,7 +428,6 @@ h2 { font-size: 1.5rem; }
     background-color: #f1f1f1;
     border-bottom: 1px solid #ddd;
 }
-
 
 .card.border-primary {
     border-color: var(--accent-purple) !important;

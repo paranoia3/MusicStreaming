@@ -5,7 +5,6 @@ const featuredTracks = [
     { title: "Happier Than Ever", artist: "Billie Eilish", duration: "4:58", album: "Happier Than Ever", rating: 3 },
 ];
 
-// Modified to use jQuery for fade in/out
 function showCustomMessage(message, duration = 3000) {
     const $messageEl = $('#toast-notification');
     if (!$messageEl.length) return;
@@ -17,12 +16,10 @@ $(document).ready(function() {
 
     console.log("jQuery is ready!");
 
-    // Dynamic Greeting Implementation
     const $greetingDisplay = $('#greeting-display');
     const $nameInput = $('#user-name-input');
     const $nameSubmitButton = $('#name-submit-btn');
 
-    // Object to manage user state
     const userState = {
         name: localStorage.getItem('userName') || 'Ariana',
     };
@@ -32,7 +29,6 @@ $(document).ready(function() {
         const hour = now.getHours();
         let timeOfDay;
 
-        // Using a switch statement to control logic based on time
         switch (true) {
             case (hour >= 5 && hour < 12):
                 timeOfDay = "Morning";
@@ -49,20 +45,16 @@ $(document).ready(function() {
         return `Good ${timeOfDay}, ${userState.name}!`;
     }
 
-    // Function to update the greeting on the page
     function updateGreeting() {
         if ($greetingDisplay.length) {
             $greetingDisplay.text(determineGreeting());
         }
-        // Also update the profile name in the navbar
         $('.profile-name').text(userState.name);
     }
 
     if ($nameInput.length && $nameSubmitButton.length) {
-        // Initial setup for the input field
         $nameInput.val(userState.name === 'Listener' ? '' : userState.name);
 
-        // Event listener for name submission
         $nameSubmitButton.on('click', (e) => {
             e.preventDefault();
             const newName = $nameInput.val().trim();
@@ -71,7 +63,6 @@ $(document).ready(function() {
                 localStorage.setItem('userName', newName);
                 updateGreeting();
                 showCustomMessage(`Greeting updated! Welcome, ${userState.name}.`);
-                // Clear the input after setting
                 $nameInput.val('');
             } else {
                 showCustomMessage("Please enter a valid name.");
@@ -80,7 +71,6 @@ $(document).ready(function() {
     }
     updateGreeting();
 
-    // Theme Toggle
     const $themeToggleButton = $('#theme-toggle-btn');
     const $body = $('body');
 
@@ -102,25 +92,21 @@ $(document).ready(function() {
             $body.removeClass('light-theme');
             $themeToggleButton.html('<i data-feather="sun"></i>');
         }
-        feather.replace(); // Re-render feather icons
+        feather.replace();
         saveThemePreference(newTheme);
     }
 
-    // Apply saved theme on a load
     if (loadThemePreference() === 'light') {
         $body.addClass('light-theme');
     }
 
     if ($themeToggleButton.length) {
-        // Set initial icon
         $themeToggleButton.html($body.hasClass('light-theme') ? '<i data-feather="moon"></i>' : '<i data-feather="sun"></i>');
-        // Event Listener
         $themeToggleButton.on('click', toggleTheme);
     }
 
     const notificationSound = new Audio('sounds/pop-423717.mp3');
 
-    // Star Rating
     $('.star-rating').each(function() {
         const $container = $(this);
         const $stars = $container.find('.star');
@@ -129,8 +115,8 @@ $(document).ready(function() {
             const $clickedStar = $(this);
             const rating = parseInt($clickedStar.data('value'));
 
-            $stars.removeClass('checked'); // Clear all
-            $stars.slice(0, rating).addClass('checked'); // Apply up to selected
+            $stars.removeClass('checked');
+            $stars.slice(0, rating).addClass('checked');
 
             if (notificationSound) {
                 notificationSound.currentTime = 0;
@@ -149,7 +135,6 @@ $(document).ready(function() {
         });
     });
 
-    // Dynamic Track List Rendering
     const $dynamicTrackList = $('#dynamic-track-list');
     if ($dynamicTrackList.length) {
         const highRatedTracks = featuredTracks.filter(track => track.rating >= 4);
@@ -167,7 +152,6 @@ $(document).ready(function() {
         $dynamicTrackList.html(trackHtml);
     }
 
-    // Keyboard Event Handling (using jQuery)
     const $navItems = $('#navbarNav .nav-item a');
     let currentFocusIndex = -1;
 
@@ -199,7 +183,6 @@ $(document).ready(function() {
         }
     });
 
-    // Form Validation and Submission (Contact Form)
     const $contactForm = $('#contact-form');
     if ($contactForm.length) {
 
@@ -231,22 +214,19 @@ $(document).ready(function() {
                 $btnText.text('Please wait...');
                 $spinner.removeClass('d-none');
 
-                // Simulate asynchronous data submission
                 setTimeout(() => {
                     showCustomMessage('Thank you! Your message has been sent successfully.');
-                    $contactForm[0].reset(); // Reset native form
+                    $contactForm[0].reset();
 
-                    // Revert button
                     $submitBtn.prop('disabled', false);
                     $btnText.text('Send message');
                     $spinner.addClass('d-none');
 
-                }, 2000); // 2-second delay
+                }, 2000);
             }
         });
     }
 
-    // Reset button for a contact form
     $('#contact-reset-btn').on('click', function(e) {
         e.preventDefault();
         $contactForm[0].reset();
@@ -278,14 +258,12 @@ $(document).ready(function() {
         });
     }
 
-    // Accordion
     $('.accordion-header').on('click', function() {
         const $item = $(this).parent('.accordion-item');
         $item.toggleClass('active');
         $('.accordion-item').not($item).removeClass('active');
     });
 
-    // Popup Subscription Form
     const $popupOverlay = $('#popup-overlay');
     $('#open-popup-btn').on('click', function(e) {
         e.preventDefault();
@@ -325,7 +303,6 @@ $(document).ready(function() {
         showCustomMessage('Redirecting to Family Plan checkout...');
     });
 
-    // Display Current Date and Time
     const $dateTimeDisplay = $('#datetime-display');
     function updateDateTime() {
         if ($dateTimeDisplay.length) {
@@ -340,14 +317,12 @@ $(document).ready(function() {
         setInterval(updateDateTime, 1000);
     }
 
-    // Initial feather icon replacement
     feather.replace();
 
     const $searchInput = $('#search-input');
     const $categoryList = $('#category-list');
     const $autocompleteContainer = $('#autocomplete-suggestions');
 
-    // Simple list of suggestions
     const searchSuggestions = ["Pop", "Rock", "Hip-Hop", "Indie", "Jazz", "Classical", "Electronic", "R&B"];
 
     if ($searchInput.length) {
@@ -381,15 +356,13 @@ $(document).ready(function() {
             });
         });
 
-        // Handle click on suggestion
         $autocompleteContainer.on('click', '.suggestion-item', function(e) {
             e.preventDefault();
             const suggestionText = $(this).text();
-            $searchInput.val(suggestionText).trigger('keyup'); // Set text and trigger filter
+            $searchInput.val(suggestionText).trigger('keyup');
             $autocompleteContainer.hide();
         });
 
-        // Hide suggestions when clicking outside
         $(document).on('click', function(e) {
             if (!$(e.target).closest('#search-input, #autocomplete-suggestions').length) {
                 $autocompleteContainer.hide();
@@ -399,7 +372,6 @@ $(document).ready(function() {
 
     const $faqSearchInput = $('#faq-search-input');
     if ($faqSearchInput.length) {
-        // Store original content
         $('.faq-content-searchable').each(function() {
             $(this).data('original-html', $(this).html());
         });
@@ -407,7 +379,6 @@ $(document).ready(function() {
         $faqSearchInput.on('keyup', function() {
             const query = $(this).val().trim();
 
-            // Clear highlights if a query is empty
             if (query === "") {
                 $('.faq-content-searchable').each(function() {
                     $(this).html($(this).data('original-html'));
@@ -415,7 +386,7 @@ $(document).ready(function() {
                 return;
             }
 
-            const regex = new RegExp(`(${query})`, 'gi'); // 'g' for global, 'i' for case-insensitive
+            const regex = new RegExp(`(${query})`, 'gi');
 
             $('.faq-content-searchable').each(function() {
                 const $content = $(this);
@@ -447,12 +418,11 @@ $(document).ready(function() {
                 $element.text(Math.floor(this.count));
             },
             complete: function() {
-                $element.text(this.count); // Ensure the final number is correct
+                $element.text(this.count);
             }
         });
     }
 
-    // Basic "in-view" check for counters
     const $counters = $('.animated-counter');
     if ($counters.length) {
         let triggered = false;
@@ -465,20 +435,19 @@ $(document).ready(function() {
             const docViewBottom = docViewTop + $(window).height();
             const elemTop = $statsContainer.offset().top;
 
-            if (elemTop <= docViewBottom - 50) { // 50px buffer
+            if (elemTop <= docViewBottom - 50) {
                 $counters.each(function() {
                     animateCounter($(this));
                 });
-                triggered = true; // Only trigger once
-                $(window).off('scroll', checkCountersInView); // Stop listening
+                triggered = true;
+                $(window).off('scroll', checkCountersInView);
             }
         };
 
         $(window).on('scroll', checkCountersInView);
-        checkCountersInView(); // Check on a load
+        checkCountersInView();
     }
 
-    // Initialize Bootstrap Tooltip
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -489,21 +458,17 @@ $(document).ready(function() {
         const textToCopy = $('#profile-name-text').text().trim();
 
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Success
             $button.find('i').replaceWith(feather.icons['check'].toSvg({ width: 16, height: 16 }));
 
-            // Update tooltip text
             const tooltip = bootstrap.Tooltip.getInstance($button[0]);
             $button.attr('data-bs-original-title', 'Copied!').tooltip('show');
 
-            // Revert after 2 seconds
             setTimeout(() => {
                 $button.find('svg').replaceWith(feather.icons['copy'].toSvg({ width: 16, height: 16, class: 'copy-icon' }));
                 $button.attr('data-bs-original-title', 'Copy name').tooltip('hide');
             }, 2000);
 
         }).catch(err => {
-            // Error
             console.error('Failed to copy: ', err);
             showCustomMessage('Failed to copy text.');
         });
@@ -522,7 +487,6 @@ $(document).ready(function() {
 
                 const elemTop = $img.offset().top;
 
-                // Check if the image is in view (with a 100px buffer)
                 if (elemTop < (docViewBottom + 100)) {
                     const src = $img.data('src');
                     if (src) {
@@ -532,9 +496,8 @@ $(document).ready(function() {
             });
         };
 
-        // Run on scroll and on load
         $(window).on('scroll resize', lazyLoadImages);
-        lazyLoadImages(); // Initial check
+        lazyLoadImages();
     }
 
 });
