@@ -13,11 +13,9 @@ function showCustomMessage(message, duration = 3000) {
     $messageEl.text(message).fadeIn(400).delay(duration).fadeOut(400);
 }
 
-
 $(document).ready(function() {
 
     console.log("jQuery is ready!");
-
 
     // Dynamic Greeting Implementation
     const $greetingDisplay = $('#greeting-display');
@@ -82,7 +80,6 @@ $(document).ready(function() {
     }
     updateGreeting();
 
-
     // Theme Toggle
     const $themeToggleButton = $('#theme-toggle-btn');
     const $body = $('body');
@@ -121,9 +118,9 @@ $(document).ready(function() {
         $themeToggleButton.on('click', toggleTheme);
     }
 
-    // Star Rating
     const notificationSound = new Audio('sounds/pop-423717.mp3');
 
+    // Star Rating
     $('.star-rating').each(function() {
         const $container = $(this);
         const $stars = $container.find('.star');
@@ -170,7 +167,6 @@ $(document).ready(function() {
         $dynamicTrackList.html(trackHtml);
     }
 
-
     // Keyboard Event Handling (using jQuery)
     const $navItems = $('#navbarNav .nav-item a');
     let currentFocusIndex = -1;
@@ -202,7 +198,6 @@ $(document).ready(function() {
             }
         }
     });
-
 
     // Form Validation and Submission (Contact Form)
     const $contactForm = $('#contact-form');
@@ -268,6 +263,20 @@ $(document).ready(function() {
         }
     }
 
+    const $settingsForm = $('#settings-form');
+    if ($settingsForm.length) {
+        $settingsForm.on('submit', function(event) {
+            event.preventDefault();
+            const $submitBtn = $('#settings-submit-btn');
+
+            $submitBtn.prop('disabled', true).text('Saving...');
+
+            setTimeout(() => {
+                showCustomMessage('Settings saved successfully!');
+                $submitBtn.prop('disabled', false).text('Save changes');
+            }, 1000);
+        });
+    }
 
     // Accordion
     $('.accordion-header').on('click', function() {
@@ -308,6 +317,13 @@ $(document).ready(function() {
         }
     });
 
+    $('#premium-plan-btn').on('click', function() {
+        showCustomMessage('Redirecting to Premium checkout...');
+    });
+
+    $('#family-plan-btn').on('click', function() {
+        showCustomMessage('Redirecting to Family Plan checkout...');
+    });
 
     // Display Current Date and Time
     const $dateTimeDisplay = $('#datetime-display');
@@ -391,7 +407,7 @@ $(document).ready(function() {
         $faqSearchInput.on('keyup', function() {
             const query = $(this).val().trim();
 
-            // Clear highlights if query is empty
+            // Clear highlights if a query is empty
             if (query === "") {
                 $('.faq-content-searchable').each(function() {
                     $(this).html($(this).data('original-html'));
@@ -459,9 +475,8 @@ $(document).ready(function() {
         };
 
         $(window).on('scroll', checkCountersInView);
-        checkCountersInView(); // Check on load
+        checkCountersInView(); // Check on a load
     }
-
 
     // Initialize Bootstrap Tooltip
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -494,7 +509,6 @@ $(document).ready(function() {
         });
     });
 
-
     const $lazyImages = $('.lazy-load');
     if ($lazyImages.length > 0) {
 
@@ -508,7 +522,7 @@ $(document).ready(function() {
 
                 const elemTop = $img.offset().top;
 
-                // Check if image is in view (with a 100px buffer)
+                // Check if the image is in view (with a 100px buffer)
                 if (elemTop < (docViewBottom + 100)) {
                     const src = $img.data('src');
                     if (src) {

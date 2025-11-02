@@ -33,7 +33,7 @@
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
           <i data-feather="sun"></i>
         </button>
-        <a href="profile.html" class="d-flex align-items-center text-white text-decoration-none me-3">
+        <a href="profile.html" class="d-flex align-items-center text-decoration-none me-3 profile-link">
           <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Avatar" class="rounded-circle">
           <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
         </a>
@@ -49,7 +49,7 @@
     <div class="col-lg-8">
       <section class="settings-section">
         <h3>Account</h3>
-        <form>
+        <form id="settings-form">
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" placeholder="ariana.@example.com">
@@ -58,7 +58,7 @@
             <label for="username" class="form-label">User name</label>
             <input type="text" class="form-control" id="username" value="Ariana Mendes">
           </div>
-          <button type="submit" class="btn btn-gradient">Save changes</button>
+          <button type="submit" class="btn btn-gradient" id="settings-submit-btn">Save changes</button>
         </form>
       </section>
 
