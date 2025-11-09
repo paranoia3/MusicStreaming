@@ -86,6 +86,13 @@ h1, h2, h3, h4, h5, h6 {
 .card-img-top {
     border-radius: 8px;
     padding: 15px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.api-album-card .card-img-top {
+    padding: 0;
+    border-radius: 12px 12px 0 0;
 }
 
 .card-body {
@@ -95,37 +102,18 @@ h1, h2, h3, h4, h5, h6 {
 .card-title {
     font-weight: bold;
     margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.card-text {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+.form-control[readonly] {
+    background-color: var(--card-color);
+    opacity: 0.7;
 }
 
-.form-control, .form-select, .input-group-text {
-    background-color: var(--hover-color);
-    border: 1px solid var(--hover-color);
-    color: var(--text-primary);
-    border-radius: 8px;
-    transition: background-color 0.5s, border-color 0.5s;
-}
-.light-theme .form-control, .light-theme .form-select, .light-theme .input-group-text {
-    background-color: #F7F7F7;
-    border: 1px solid #CCCCCC;
-}
-
-.form-control:focus, .form-select:focus {
-    background-color: var(--hover-color);
-    color: var(--text-primary);
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 0 0.25rem rgba(167, 85, 222, 0.25);
-}
-.light-theme .form-control:focus, .light-theme .form-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba(106, 13, 173, 0.25);
-}
-
-.form-control::placeholder {
-    color: var(--text-secondary);
+.genre-card-btn {
+    cursor: pointer;
 }
 
 .search-bar {
@@ -139,14 +127,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-gradient {
     background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
-    color: var(--text-primary);
+    color: #FFFFFF;
     border: none;
     font-weight: bold;
     transition: opacity 0.3s;
 }
 .btn-gradient:hover {
-    color: var(--text-primary);
+    color: #FFFFFF;
     opacity: 0.9;
+}
+
+.btn-outline-secondary {
+    color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+.btn-outline-secondary:hover {
+    color: var(--text-primary);
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
 }
 
 #contact-submit-btn .spinner-border-sm {
@@ -158,6 +156,19 @@ h1, h2, h3, h4, h5, h6 {
     padding: 25px;
     border-radius: 12px;
     transition: background-color 0.5s;
+}
+
+.auth-form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+.auth-link {
+    color: var(--accent-purple);
+    text-decoration: none;
+    font-weight: bold;
+}
+.auth-link:hover {
+    text-decoration: underline;
 }
 
 .list-group-item.track-list-item {
@@ -214,6 +225,9 @@ h2 { font-size: 1.5rem; }
 }
 .form-control.is-invalid {
     border-color: var(--accent-pink);
+}
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(244, 81, 168, 0.25);
 }
 
 .star-rating {
@@ -366,26 +380,6 @@ h2 { font-size: 1.5rem; }
     z-index: 1055;
     transition: width 0.1s ease-out;
     border-bottom-right-radius: 4px;
-}
-
-#autocomplete-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-}
-#autocomplete-suggestions .list-group-item {
-    background-color: var(--card-color);
-    color: var(--text-primary);
-    border-color: var(--hover-color);
-    cursor: pointer;
-}
-#autocomplete-suggestions .list-group-item:hover {
-    background-color: var(--hover-color);
 }
 
 .highlight {

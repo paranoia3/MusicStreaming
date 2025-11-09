@@ -33,11 +33,7 @@
                 <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
                     <i data-feather="sun"></i>
                 </button>
-                <a href="profile.html" class="d-flex align-items-center text-decoration-none me-3 profile-link">
-                    <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Avatar" class="rounded-circle">
-                    <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
-                </a>
-                <a href="settings.html" class="text-secondary"><i data-feather="settings"></i></a>
+                <div id="auth-links" class="d-flex align-items-center"></div>
             </div>
         </div>
     </div>
@@ -48,16 +44,7 @@
     <h1 id="greeting-display">Listen anywhere, anytime!</h1>
     <p class="text-secondary">Here's what we've picked for you today.</p>
 
-    <div class="mb-4">
-        <div class="input-group" style="max-width: 300px;">
-            <input type="text" class="form-control" id="user-name-input" placeholder="Enter your name">
-            <button class="btn btn-gradient" id="name-submit-btn">Update Greeting</button>
-        </div>
-        <small class="text-secondary">Enter your name above to personalize the greeting!</small>
-    </div>
-
-    <a href="#" id="open-popup-btn" class="btn btn-lg btn-gradient mt-3">Subscribe to news</a>
-
+    <a href="subscription.html" id="open-popup-btn" class="btn btn-lg btn-gradient mt-3">Subscribe to news</a>
 
     <section class="my-5">
         <h2>Popular playlists</h2>
@@ -105,8 +92,7 @@
         <h2>Rate this month's featured artist: Imagine Dragons</h2>
         <div class="d-flex align-items-center gap-3">
             <img src="images/imagine_dragons.webp" class="rounded-circle" alt="Imagine Dragons" style="width: 80px; height: 80px; object-fit: cover;">
-
-            <div class="star-rating" data-artist-id="ID-101">
+            <div class="star-rating" data-item-id="artist-imagine-dragons">
                 <span class="star" data-value="1">★</span>
                 <span class="star" data-value="2">★</span>
                 <span class="star" data-value="3">★</span>
@@ -117,8 +103,14 @@
     </section>
 
     <section class="mt-5">
-        <h2>Top Tracks</h2>
-        <ul class="list-group list-group-flush" id="dynamic-track-list">
+        <h2>Today's Top Tracks (from Deezer)</h2>
+        <div id="api-track-list-loading" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-secondary mt-2">Loading top tracks...</p>
+        </div>
+        <ul class="list-group list-group-flush" id="api-track-list">
         </ul>
     </section>
 

@@ -33,29 +33,39 @@
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
           <i data-feather="sun"></i>
         </button>
-        <a href="profile.html" class="d-flex align-items-center text-decoration-none me-3 profile-link">
-          <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=A" alt="Avatar" class="rounded-circle">
-          <span class="profile-name ms-2 d-none d-lg-inline">Ariana</span>
-        </a>
-        <a href="settings.html" class="text-secondary"><i data-feather="settings"></i></a>
+        <div id="auth-links" class="d-flex align-items-center"></div>
       </div>
     </div>
   </div>
 </nav>
 
 <main class="container-fluid p-3 p-sm-4 p-md-5">
-  <div class="position-relative">
-    <div class="input-group input-group-lg mb-1">
-      <span class="input-group-text search-icon-bg"><i data-feather="search"></i></span>
-      <input type="text" class="form-control search-bar" id="search-input" placeholder="What'd you like to listen? (e.g., Pop, Rock)">
+  <form id="api-search-form">
+    <div class="position-relative">
+      <div class="input-group input-group-lg mb-1">
+        <span class="input-group-text search-icon-bg"><i data-feather="search"></i></span>
+        <input type="text" class="form-control search-bar" id="search-input" placeholder="What'd you like to listen? (e.g., Pop, Rock)">
+        <button class="btn btn-gradient" type="submit" id="search-submit-btn">Search</button>
+      </div>
     </div>
-    <div id="autocomplete-suggestions" class="list-group"></div>
-  </div>
+  </form>
 
+  <section id="search-results-section" class="mt-5">
+    <h2 id="search-results-heading" style="display: none;">Search Results</h2>
+    <div id="api-search-loading" class="text-center" style="display: none;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="text-secondary mt-2">Searching...</p>
+    </div>
+    <div id="api-search-results" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
+    </div>
+    <p id="api-search-placeholder" class="text-secondary">Search for tracks, artists, or albums to see results from Deezer.</p>
+  </section>
 
   <h2 class="mt-5">Browse by category</h2>
   <div id="category-list" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-4">
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Pop">
       <div class="card h-100">
         <img src="images/popgenre.jpg" class="card-img-top" alt="Category">
         <div class="card-body">
@@ -63,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Rock">
       <div class="card h-100">
         <img src="images/rock.jpg" class="card-img-top" alt="Category">
         <div class="card-body">
@@ -71,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Hip-Hop">
       <div class="card h-100">
         <img src="images/hiphopgenre.jpg" class="card-img-top" alt="Category">
         <div class="card-body">
@@ -79,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Indie">
       <div class="card h-100">
         <img src="images/indie.jpg" class="card-img-top" alt="Category">
         <div class="card-body">
@@ -87,7 +97,7 @@
         </div>
       </div>
     </div>
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Jazz">
       <div class="card h-100">
         <img src="images/jazz.jpeg" class="card-img-top" alt="Category">
         <div class="card-body">
@@ -95,7 +105,7 @@
         </div>
       </div>
     </div>
-    <div class="col category-item">
+    <div class="col category-item genre-card-btn" data-genre="Classical">
       <div class="card h-100">
         <img src="images/classical.jpg" class="card-img-top" alt="Category">
         <div class="card-body">
