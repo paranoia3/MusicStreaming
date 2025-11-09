@@ -26,14 +26,13 @@
         <li class="nav-item"><a class="nav-link" href="playlists.html">Playlists</a></li>
         <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
         <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+        <li classs="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
         <li class="nav-item"><a class="nav-link" href="subscription.html">Subscription</a></li>
       </ul>
       <div class="d-flex align-items-center">
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
           <i data-feather="sun"></i>
         </button>
-        <!-- Auth links will be dynamically inserted here by main.js -->
         <div id="auth-links" class="d-flex align-items-center"></div>
       </div>
     </div>
@@ -41,13 +40,13 @@
 </nav>
 
 <main class="container-fluid p-3 p-sm-4 p-md-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-5 col-md-8">
-      <div class="auth-form-container settings-section p-4 p-sm-5 rounded-4">
-        <h1 class="text-center mb-4">Create Account</h1>
+  <div class="auth-form-container">
+    <div class="card settings-section">
+      <div class="card-body">
+        <h1 class="text-center mb-4">Sign Up</h1>
         <form id="signup-form" novalidate>
           <div class="mb-3">
-            <label for="signup-name" class="form-label">Full Name</label>
+            <label for="signup-name" class="form-label">Name</label>
             <input type="text" class="form-control" id="signup-name" placeholder="John Doe" required>
             <div class="error-message"></div>
           </div>
@@ -58,25 +57,26 @@
           </div>
           <div class="mb-3">
             <label for="signup-phone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="signup-phone" placeholder="+1 (555) 555-5555" required>
+            <input type="tel" class="form-control" id="signup-phone" placeholder="+7 (700) 123-45-67" required>
             <div class="error-message"></div>
           </div>
-          <div class="mb-3">
+
+          <div class="mb-3 position-relative">
             <label for="signup-password" class="form-label">Password</label>
             <input type="password" class="form-control" id="signup-password" placeholder="Min. 8 characters, 1 uppercase, 1 number" required>
+            <button type="button" class="btn btn-link password-toggle-btn" id="toggle-signup-password">
+              <i data-feather="eye"></i>
+            </button>
             <div class="error-message"></div>
           </div>
-          <div class="mb-3">
-            <label for="signup-confirm-password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="signup-confirm-password" placeholder="Repeat password" required>
-            <div class="error-message"></div>
-          </div>
-          <button type="submit" class="btn btn-lg btn-gradient w-100" id="signup-submit-btn">
+
+          <button type="submit" class="btn btn-gradient w-100 btn-lg mt-3" id="signup-submit-btn">
             <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
             <span class="btn-text">Sign Up</span>
           </button>
         </form>
-        <p class="text-center text-secondary mt-4 mb-0">
+
+        <p class="text-center text-secondary mt-4">
           Already have an account? <a href="login.html" class="auth-link">Log In</a>
         </p>
       </div>

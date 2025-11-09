@@ -1,297 +1,31 @@
-function showCustomMessage(message, duration = 3000) {
-    const $messageEl = $('#toast-notification');
-    if (!$messageEl.length) return;
-    $messageEl.text(message).fadeIn(400).delay(duration).fadeOut(400);
-}
-
-function showError($inputElement, message) {
-    const $errorDiv = $inputElement.next('.error-message');
-    $inputElement.addClass('is-invalid');
-    if ($errorDiv.length) {
-        $errorDiv.text(message).show();
-    }
-}
-
-function clearErrors($form) {
-    $form.find('.error-message').hide().text('');
-    $form.find('.is-invalid').removeClass('is-invalid');
-}
-
-function formatDuration(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-}
-
-
 $(document).ready(function() {
-    console.log("jQuery is ready!");
 
     feather.replace();
 
-    const DEEZER_API_URL = "https://api.deezer.com";
+    function showCustomMessage(message, duration = 3000) {
+        const $messageEl = $('#toast-notification');
+        if (!$messageEl.length) return;
+
+        $messageEl.text(message).fadeIn(400).delay(duration).fadeOut(400);
+    }
+
+    function showError($inputElement, message) {
+        const $errorDiv = $inputElement.next('.error-message');
+        $inputElement.addClass('is-invalid');
+        if ($errorDiv.length) {
+            $errorDiv.text(message).show();
+        } else {
+            $inputElement.next().next('.error-message').text(message).show();
+        }
+    }
+
+    function clearErrors($form) {
+        $form.find('.error-message').hide().text('');
+        $form.find('.is-invalid').removeClass('is-invalid');
+    }
+
+    const $themeToggleButton = $('#theme-toggle-btn');
     const $body = $('body');
-    const $greetingDisplay = $('#greeting-display');
-
-    function getLoggedInUser() {
-        const userJson = localStorage.getItem('loggedInUser');
-        return userJson ? JSON.parse(userJson) : null;
-    }
-
-    function getAllUsers() {
-        const usersJson = localStorage.getItem('users');
-        return usersJson ? JSON.parse(usersJson) : [];
-    }
-
-    function saveAllUsers(users) {
-        localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    function updateNavbar() {
-        const user = getLoggedInUser();
-        const $authLinks = $('#auth-links');
-        if (!$authLinks.length) return;
-
-        let authHtml = '';
-        if (user) {
-            const avatarLetter = user.name ? user.name.charAt(0).toUpperCase() : 'A';
-            authHtml = `
-                <a href="profile.html" class="d-flex align-items-center text-decoration-none me-3 profile-link">
-                  <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=${avatarLetter}" alt="Avatar" class="rounded-circle">
-                  <span class="profile-name ms-2 d-none d-lg-inline">${user.name}</span>
-                </a>
-                <a href="settings.html" class="text-secondary me-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Settings">
-                    <i data-feather="settings"></i>
-                </a>
-                <button class="btn btn-outline-secondary btn-sm" id="logout-btn">Log Out</button>
-            `;
-        } else {
-            authHtml = `
-                <a href="login.html" class="btn btn-outline-secondary me-2">Log In</a>
-                <a href="signup.html" class="btn btn-gradient">Sign Up</a>
-            `;
-        }
-        $authLinks.html(authHtml);
-        if (user) {
-            $('#logout-btn').on('click', handleLogout);
-        }
-        feather.replace();
-    }
-
-    function handleLogout() {
-        localStorage.removeItem('loggedInUser');
-        showCustomMessage('You have been logged out.');
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1500);
-    }
-
-    function checkAuth() {
-        const user = getLoggedInUser();
-        const currentPage = window.location.pathname.split('/').pop();
-        const protectedPages = ['profile.html', 'settings.html'];
-
-        if (!user && protectedPages.includes(currentPage)) {
-            showCustomMessage('You must be logged in to view this page. Redirecting...');
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 2000);
-        } else if (user && (currentPage === 'login.html' || currentPage === 'signup.html')) {
-            showCustomMessage('You are already logged in. Redirecting to profile...');
-            setTimeout(() => {
-                window.location.href = 'profile.html';
-            }, 2000);
-        }
-    }
-
-    function handleLogin(event) {
-        event.preventDefault();
-        const $form = $('#login-form');
-        clearErrors($form);
-
-        const email = $('#login-email').val().trim();
-        const password = $('#login-password').val().trim();
-        let isValid = true;
-
-        if (email === '') {
-            showError($('#login-email'), 'Please enter your email.');
-            isValid = false;
-        }
-        if (password === '') {
-            showError($('#login-password'), 'Please enter your password.');
-            isValid = false;
-        }
-        if (!isValid) return;
-
-        const users = getAllUsers();
-        const foundUser = users.find(user => user.email === email && user.password === password);
-
-        if (foundUser) {
-            localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
-            showCustomMessage(`Welcome back, ${foundUser.name}!`);
-            setTimeout(() => {
-                window.location.href = 'profile.html';
-            }, 1500);
-        } else {
-            showCustomMessage('Invalid email or password.');
-            showError($('#login-email'), 'Invalid credentials.');
-            showError($('#login-password'), 'Invalid credentials.');
-        }
-    }
-
-    function handleSignUp(event) {
-        event.preventDefault();
-        const $form = $('#signup-form');
-        clearErrors($form);
-
-        const name = $('#signup-name').val().trim();
-        const email = $('#signup-email').val().trim();
-        const phone = $('#signup-phone').val().trim();
-        const password = $('#signup-password').val().trim();
-        const confirmPassword = $('#signup-confirm-password').val().trim();
-
-        let isValid = true;
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-
-        if (name === '') {
-            showError($('#signup-name'), 'Please enter your full name.');
-            isValid = false;
-        }
-
-        if (email === '') {
-            showError($('#signup-email'), 'Please enter your email.');
-            isValid = false;
-        } else if (!emailRegex.test(email)) {
-            showError($('#signup-email'), 'Please enter a valid email format.');
-            isValid = false;
-        } else {
-            const users = getAllUsers();
-            if (users.find(user => user.email === email)) {
-                showError($('#signup-email'), 'This email is already registered.');
-                isValid = false;
-            }
-        }
-
-        if (phone === '') {
-            showError($('#signup-phone'), 'Please enter your phone number.');
-            isValid = false;
-        } else if (!phoneRegex.test(phone)) {
-            showError($('#signup-phone'), 'Please enter a valid phone number (e.g., +15555555555).');
-            isValid = false;
-        }
-
-        if (password === '') {
-            showError($('#signup-password'), 'Please create a password.');
-            isValid = false;
-        } else if (!passwordRegex.test(password)) {
-            showError($('#signup-password'), 'Password must be at least 8 characters long and include one uppercase letter and one number.');
-            isValid = false;
-        }
-
-        if (confirmPassword === '') {
-            showError($('#signup-confirm-password'), 'Please confirm your password.');
-            isValid = false;
-        } else if (password !== confirmPassword) {
-            showError($('#signup-confirm-password'), 'Passwords do not match.');
-            isValid = false;
-        }
-
-        if (!isValid) return;
-
-        const newUser = {
-            id: Date.now().toString(),
-            name: name,
-            email: email,
-            phone: phone,
-            password: password
-        };
-
-        const users = getAllUsers();
-        users.push(newUser);
-        saveAllUsers(users);
-
-        localStorage.setItem('loggedInUser', JSON.stringify(newUser));
-
-        showCustomMessage('Account created successfully! Welcome!');
-        setTimeout(() => {
-            window.location.href = 'profile.html';
-        }, 1500);
-    }
-
-    $('#login-form').on('submit', handleLogin);
-    $('#signup-form').on('submit', handleSignUp);
-
-    function initProfilePage() {
-        const user = getLoggedInUser();
-        if (!user) return;
-
-        $('#profile-name-text').text(user.name);
-        $('#profile-email-text').text(user.email);
-        const avatarLetter = user.name ? user.name.charAt(0).toUpperCase() : 'A';
-        $('#profile-avatar').attr('src', `https://placehold.co/150x150/6B0F9C/FFFFFF?text=${avatarLetter}`);
-    }
-
-    function initSettingsPage() {
-        const user = getLoggedInUser();
-        if (!user) return;
-
-        $('#settings-email').val(user.email);
-        $('#settings-username').val(user.name);
-        $('#settings-phone').val(user.phone);
-
-        $('#settings-form').on('submit', function(event) {
-            event.preventDefault();
-            const $submitBtn = $('#settings-submit-btn');
-            $submitBtn.prop('disabled', true).text('Saving...');
-
-            const newName = $('#settings-username').val().trim();
-            const newPhone = $('#settings-phone').val().trim();
-
-            let users = getAllUsers();
-            let userIndex = users.findIndex(u => u.id === user.id);
-
-            if (userIndex !== -1) {
-                users[userIndex].name = newName;
-                users[userIndex].phone = newPhone;
-                saveAllUsers(users);
-
-                user.name = newName;
-                user.phone = newPhone;
-                localStorage.setItem('loggedInUser', JSON.stringify(user));
-
-                setTimeout(() => {
-                    showCustomMessage('Settings saved successfully!');
-                    $submitBtn.prop('disabled', false).text('Save changes');
-                    updateNavbar();
-                }, 1000);
-            } else {
-                setTimeout(() => {
-                    showCustomMessage('Error: Could not find user to update.');
-                    $submitBtn.prop('disabled', false).text('Save changes');
-                }, 1000);
-            }
-        });
-    }
-
-    function initGreeting() {
-        const user = getLoggedInUser();
-        if ($greetingDisplay.length) {
-            const now = new Date();
-            const hour = now.getHours();
-            let timeOfDay;
-
-            if (hour >= 5 && hour < 12) timeOfDay = "Morning";
-            else if (hour >= 12 && hour < 17) timeOfDay = "Afternoon";
-            else if (hour >= 17 && hour < 22) timeOfDay = "Evening";
-            else timeOfDay = "Night";
-
-            const name = user ? user.name : 'Music Lover';
-            $greetingDisplay.text(`Good ${timeOfDay}, ${name}!`);
-        }
-    }
 
     function loadThemePreference() {
         return localStorage.getItem('theme') || 'dark';
@@ -303,79 +37,194 @@ $(document).ready(function() {
 
     function toggleTheme() {
         const newTheme = $body.hasClass('light-theme') ? 'dark' : 'light';
+
         if (newTheme === 'light') {
             $body.addClass('light-theme');
-            $('#theme-toggle-btn').html('<i data-feather="moon"></i>');
+            $themeToggleButton.html('<i data-feather="moon"></i>');
         } else {
             $body.removeClass('light-theme');
-            $('#theme-toggle-btn').html('<i data-feather="sun"></i>');
+            $themeToggleButton.html('<i data-feather="sun"></i>');
         }
         feather.replace();
         saveThemePreference(newTheme);
     }
 
-    if (loadThemePreference() === 'light') {
+    const currentTheme = loadThemePreference();
+    if (currentTheme === 'light') {
         $body.addClass('light-theme');
+        $themeToggleButton.html('<i data-feather="moon"></i>');
+    } else {
+        $themeToggleButton.html('<i data-feather="sun"></i>');
     }
-    $('#theme-toggle-btn').html($body.hasClass('light-theme') ? '<i data-feather="moon"></i>' : '<i data-feather="sun"></i>');
     feather.replace();
-    $('#theme-toggle-btn').on('click', toggleTheme);
 
-    function getRatings() {
-        const ratingsJson = localStorage.getItem('userRatings');
-        return ratingsJson ? JSON.parse(ratingsJson) : {};
+    if ($themeToggleButton.length) {
+        $themeToggleButton.on('click', toggleTheme);
     }
 
-    function saveRating(itemId, rating) {
-        const ratings = getRatings();
-        ratings[itemId] = rating;
-        localStorage.setItem('userRatings', JSON.stringify(ratings));
+    const DB_KEY = 'aitumusic_users';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+    function getUsersDB() {
+        return JSON.parse(localStorage.getItem(DB_KEY)) || [];
     }
 
-    function loadSavedRatings() {
-        const ratings = getRatings();
-        $('.star-rating').each(function() {
-            const $container = $(this);
-            const itemId = $container.data('item-id');
-            if (ratings[itemId]) {
-                const rating = ratings[itemId];
-                const $stars = $container.find('.star');
-                $stars.removeClass('checked');
-                $stars.slice(0, rating).addClass('checked');
-            }
-        });
+    function saveUsersDB(users) {
+        localStorage.setItem(DB_KEY, JSON.stringify(users));
     }
 
-    $('.star-rating').each(function() {
-        const $container = $(this);
-        const $stars = $container.find('.star');
-        const itemId = $container.data('item-id');
+    function updateNavbar() {
+        const $authLinksContainer = $('#auth-links');
+        if (!$authLinksContainer.length) return;
 
-        $stars.on('click', function() {
-            const $clickedStar = $(this);
-            const rating = parseInt($clickedStar.data('value'));
+        if (currentUser) {
+            const avatarLetter = currentUser.name.charAt(0).toUpperCase();
+            $authLinksContainer.html(`
+                <a href="profile.html" class="d-flex align-items-center text-decoration-none me-3 profile-link">
+                    <img src="https://placehold.co/40x40/6B0F9C/FFFFFF?text=${avatarLetter}" alt="Avatar" class="rounded-circle">
+                    <span class="profile-name ms-2 d-none d-lg-inline">${currentUser.name}</span>
+                </a>
+                <a href="settings.html" class="text-secondary me-3"><i data-feather="settings"></i></a>
+                <button class="btn btn-outline-secondary btn-sm" id="logout-btn">Log Out</button>
+            `);
+        } else {
+            $authLinksContainer.html(`
+                <a href="login.html" class="btn btn-outline-secondary me-2">Log In</a>
+                <a href="signup.html" class="btn btn-gradient">Sign Up</a>
+            `);
+        }
+        feather.replace();
+    }
 
-            if (!getLoggedInUser()) {
-                showCustomMessage('Please log in to save your rating.');
-                return;
-            }
-
-            $stars.removeClass('checked');
-            $stars.slice(0, rating).addClass('checked');
-
-            saveRating(itemId, rating);
-            showCustomMessage(`You rated this ${rating} stars!`);
-        });
-
-        $container.on('mouseover', '.star', function() {
-            const hoverRating = parseInt($(this).data('value'));
-            $stars.each(function(index) {
-                $(this).css('color', index < hoverRating ? 'gold' : '');
-            });
-        }).on('mouseout', function() {
-            $stars.css('color', '');
-        });
+    $(document).on('click', '#logout-btn', function() {
+        localStorage.removeItem('currentUser');
+        currentUser = null;
+        showCustomMessage('You have been logged out.');
+        updateNavbar();
+        if (window.location.pathname.includes('profile.html') || window.location.pathname.includes('settings.html')) {
+            window.location.href = 'index.html';
+        }
     });
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const phoneRegex = /^\+?[7,8] ?\(?[7]\d{2}\)? ?\d{3}-?\d{2}-?\d{2}$/;
+    const passRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    const $signupForm = $('#signup-form');
+    if ($signupForm.length) {
+        $signupForm.on('submit', function(event) {
+            event.preventDefault();
+            clearErrors($signupForm);
+            let isValid = true;
+
+            const $name = $('#signup-name');
+            const $email = $('#signup-email');
+            const $phone = $('#signup-phone');
+            const $password = $('#signup-password');
+
+            if ($name.val().trim() === '') {
+                isValid = false;
+                showError($name, 'Please enter your name.');
+            }
+            if ($email.val().trim() === '') {
+                isValid = false;
+                showError($email, 'Please enter your email.');
+            } else if (!emailRegex.test($email.val())) {
+                isValid = false;
+                showError($email, 'Please enter a valid email.');
+            }
+            if ($phone.val().trim() === '') {
+                isValid = false;
+                showError($phone, 'Please enter your phone number.');
+            } else if (!phoneRegex.test($phone.val())) {
+                isValid = false;
+                showError($phone, 'Please enter a valid phone number (e.g., +7 700 123-45-67).');
+            }
+            if ($password.val().trim() === '') {
+                isValid = false;
+                showError($password, 'Please enter a password.');
+            } else if (!passRegex.test($password.val())) {
+                isValid = false;
+                showError($password, 'Password must be min. 8 characters, with 1 uppercase letter and 1 number.');
+            }
+
+            if (isValid) {
+                const users = getUsersDB();
+                const emailExists = users.some(user => user.email === $email.val());
+
+                if (emailExists) {
+                    showError($email, 'This email is already registered.');
+                    return;
+                }
+
+                const newUser = {
+                    name: $name.val(),
+                    email: $email.val(),
+                    phone: $phone.val(),
+                    password: $password.val()
+                };
+                users.push(newUser);
+                saveUsersDB(users);
+
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+                currentUser = newUser;
+
+                const $submitBtn = $('#signup-submit-btn');
+                $submitBtn.prop('disabled', true);
+                $submitBtn.find('.btn-text').text('Signing Up...');
+                $submitBtn.find('.spinner-border').removeClass('d-none');
+
+                setTimeout(() => {
+                    showCustomMessage('Sign up successful! Welcome, ' + newUser.name);
+                    window.location.href = 'profile.html';
+                }, 1000);
+            }
+        });
+    }
+
+    const $loginForm = $('#login-form');
+    if ($loginForm.length) {
+        $loginForm.on('submit', function(event) {
+            event.preventDefault();
+            clearErrors($loginForm);
+            let isValid = true;
+
+            const $email = $('#login-email');
+            const $password = $('#login-password');
+
+            if ($email.val().trim() === '') {
+                isValid = false;
+                showError($email, 'Please enter your email.');
+            }
+            if ($password.val().trim() === '') {
+                isValid = false;
+                showError($password, 'Please enter your password.');
+            }
+
+            if (isValid) {
+                const users = getUsersDB();
+                const foundUser = users.find(user => user.email === $email.val());
+
+                if (!foundUser || foundUser.password !== $password.val()) {
+                    showError($email, 'Invalid email or password.');
+                    return;
+                }
+
+                localStorage.setItem('currentUser', JSON.stringify(foundUser));
+                currentUser = foundUser;
+
+                const $submitBtn = $('#login-submit-btn');
+                $submitBtn.prop('disabled', true);
+                $submitBtn.find('.btn-text').text('Logging In...');
+                $submitBtn.find('.spinner-border').removeClass('d-none');
+
+                setTimeout(() => {
+                    showCustomMessage('Login successful! Welcome back, ' + foundUser.name);
+                    window.location.href = 'profile.html';
+                }, 1000);
+            }
+        });
+    }
 
     const $contactForm = $('#contact-form');
     if ($contactForm.length) {
@@ -388,7 +237,6 @@ $(document).ready(function() {
             const $email = $('#contact-email');
             const $subject = $('#contact-subject');
             const $message = $('#contact-message');
-            const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
             if ($name.val().trim() === '') { isValid = false; showError($name, 'Please enter your name.'); }
             if ($email.val().trim() === '') { isValid = false; showError($email, 'Please enter your email.'); }
@@ -423,54 +271,207 @@ $(document).ready(function() {
         });
     }
 
-    function fetchDeezerTopTracks() {
-        const $list = $('#api-track-list');
-        const $loading = $('#api-track-list-loading');
-        if (!$list.length) return;
+    function togglePasswordVisibility(inputId, toggleBtnId) {
+        const $passwordInput = $(inputId);
+        const $toggleBtn = $(toggleBtnId);
 
+        if ($passwordInput.attr('type') === 'password') {
+            $passwordInput.attr('type', 'text');
+            $toggleBtn.html('<i data-feather="eye-off"></i>');
+        } else {
+            $passwordInput.attr('type', 'password');
+            $toggleBtn.html('<i data-feather="eye"></i>');
+        }
+        feather.replace();
+    }
+
+    $('#toggle-login-password').on('click', function() {
+        togglePasswordVisibility('#login-password', '#toggle-login-password');
+    });
+
+    $('#toggle-signup-password').on('click', function() {
+        togglePasswordVisibility('#signup-password', '#toggle-signup-password');
+    });
+
+    const currentPage = window.location.pathname;
+
+    if (currentPage.includes('profile.html') || currentPage.includes('settings.html')) {
+        if (!currentUser) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        if (currentPage.includes('profile.html')) {
+            const $name = $('#profile-name-text');
+            const $email = $('#profile-email-text');
+            const $avatar = $('#profile-avatar');
+
+            if ($name.length) {
+                $name.text(currentUser.name);
+                $email.text(currentUser.email);
+                $avatar.attr('src', `https://placehold.co/150x150/6B0F9C/FFFFFF?text=${currentUser.name.charAt(0).toUpperCase()}`);
+            }
+
+            const $counters = $('.animated-counter');
+            if ($counters.length) {
+                $counters.each(function() {
+                    const $element = $(this);
+                    const target = parseInt($element.data('count'), 10);
+                    $({ count: 0 }).animate({ count: target }, {
+                        duration: 1500,
+                        easing: 'swing',
+                        step: function() { $element.text(Math.floor(this.count)); },
+                        complete: function() { $element.text(this.count); }
+                    });
+                });
+            }
+        }
+
+        if (currentPage.includes('settings.html')) {
+            const $email = $('#settings-email');
+            const $username = $('#settings-username');
+            const $phone = $('#settings-phone');
+            const $settingsForm = $('#settings-form');
+
+            if ($email.length) {
+                $email.val(currentUser.email);
+                $username.val(currentUser.name);
+                $phone.val(currentUser.phone);
+            }
+
+            $settingsForm.on('submit', function(event) {
+                event.preventDefault();
+                const $submitBtn = $('#settings-submit-btn');
+                $submitBtn.prop('disabled', true).text('Saving...');
+
+                const newName = $username.val();
+                const newPhone = $phone.val();
+
+                let users = getUsersDB();
+                let userIndex = users.findIndex(user => user.email === currentUser.email);
+
+                if (userIndex !== -1) {
+                    users[userIndex].name = newName;
+                    users[userIndex].phone = newPhone;
+                    saveUsersDB(users);
+
+                    currentUser.name = newName;
+                    currentUser.phone = newPhone;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                    updateNavbar();
+                }
+
+                setTimeout(() => {
+                    showCustomMessage('Settings saved successfully!');
+                    $submitBtn.prop('disabled', false).text('Save changes');
+                }, 1000);
+            });
+        }
+    }
+
+    const $greetingDisplay = $('#greeting-display');
+    if ($greetingDisplay.length && currentUser) {
+        const now = new Date();
+        const hour = now.getHours();
+        let timeOfDay;
+
+        if (hour >= 5 && hour < 12) timeOfDay = "Morning";
+        else if (hour >= 12 && hour < 17) timeOfDay = "Afternoon";
+        else if (hour >= 17 && hour < 22) timeOfDay = "Evening";
+        else timeOfDay = "Night";
+
+        $greetingDisplay.text(`Good ${timeOfDay}, ${currentUser.name}!`);
+    }
+
+    const ratingsDB = JSON.parse(localStorage.getItem('aitumusic_ratings')) || {};
+
+    function saveRatings() {
+        localStorage.setItem('aitumusic_ratings', JSON.stringify(ratingsDB));
+    }
+
+    $('.star-rating').each(function() {
+        const $container = $(this);
+        const itemId = $container.data('item-id');
+        const savedRating = ratingsDB[itemId];
+
+        if (savedRating) {
+            $container.find('.star').slice(0, savedRating).addClass('checked');
+        }
+    });
+
+    $('.star-rating').on('click', '.star', function() {
+        const $clickedStar = $(this);
+        const $container = $clickedStar.closest('.star-rating');
+        const rating = parseInt($clickedStar.data('value'));
+        const itemId = $container.data('item-id');
+
+        const $stars = $container.find('.star');
+        $stars.removeClass('checked');
+        $stars.slice(0, rating).addClass('checked');
+
+        ratingsDB[itemId] = rating;
+        saveRatings();
+
+        showCustomMessage(`You rated this ${rating} stars!`);
+    });
+
+    $('.star-rating').on('mouseover', '.star', function() {
+        const hoverRating = parseInt($(this).data('value'));
+        $(this).closest('.star-rating').find('.star').each(function(index) {
+            $(this).css('color', index < hoverRating ? 'gold' : '');
+        });
+    }).on('mouseout', function() {
+        $(this).find('.star').css('color', '');
+    });
+
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const API_BASE_URL = 'https://api.deezer.com/';
+
+    const $apiTrackList = $('#api-track-list');
+    if ($apiTrackList.length) {
         $.ajax({
-            url: `${DEEZER_API_URL}/chart/0/tracks?output=jsonp`,
-            dataType: 'jsonp',
+            url: `${PROXY_URL}${API_BASE_URL}chart/0/tracks`,
+            method: 'GET',
+            dataType: 'json',
             success: function(response) {
-                $loading.hide();
+                $('#api-track-list-loading').hide();
                 if (response.data && response.data.length > 0) {
-                    const tracksHtml = response.data.slice(0, 10).map((track, index) => `
-                        <li class="list-group-item track-list-item api-track-item">
-                            <img src="${track.album.cover_small}" class="rounded-2" alt="${track.album.title}">
+                    const tracksHtml = response.data.slice(0, 10).map(track => `
+                        <li class="list-group-item track-list-item">
+                            <img src="${track.album.cover_small}" class="rounded-2" alt="Track">
                             <div class="track-info">
                                 <div class="track-title">${track.title}</div>
                                 <div class="track-artist">${track.artist.name}</div>
                             </div>
                             <div class="track-album d-none d-md-block">${track.album.title}</div>
-                            <div class="track-duration">${formatDuration(track.duration)}</div>
+                            <div class="track-duration">${Math.floor(track.duration / 60)}:${(track.duration % 60).toString().padStart(2, '0')}</div>
                         </li>
                     `).join('');
-                    $list.html(tracksHtml);
+                    $apiTrackList.html(tracksHtml);
                 } else {
-                    $list.html('<li class="list-group-item text-secondary">Could not load top tracks.</li>');
+                    $apiTrackList.html('<p class="text-secondary">Could not load tracks.</p>');
                 }
             },
             error: function() {
-                $loading.hide();
-                $list.html('<li class="list-group-item text-danger">Error fetching tracks from Deezer.</li>');
+                $('#api-track-list-loading').hide();
+                $apiTrackList.html('<p class="text-danger">Error: Could not connect to the API. Please try again later.</p>');
             }
         });
     }
 
-    function fetchDeezerTopAlbums() {
-        const $list = $('#api-album-list');
-        const $loading = $('#api-album-list-loading');
-        if (!$list.length) return;
-
+    const $apiAlbumList = $('#api-album-list');
+    if ($apiAlbumList.length) {
         $.ajax({
-            url: `${DEEZER_API_URL}/chart/0/albums?output=jsonp`,
-            dataType: 'jsonp',
+            url: `${PROXY_URL}${API_BASE_URL}chart/0/albums`,
+            method: 'GET',
+            dataType: 'json',
             success: function(response) {
-                $loading.hide();
+                $('#api-album-list-loading').hide();
                 if (response.data && response.data.length > 0) {
-                    const albumsHtml = response.data.slice(0, 12).map(album => `
-                        <div class="col">
-                            <div class="card h-100 api-album-card">
+                    const albumsHtml = response.data.map(album => `
+                        <div class="col api-album-card">
+                            <div class="card h-100">
                                 <img src="${album.cover_medium}" class="card-img-top" alt="${album.title}">
                                 <div class="card-body">
                                     <h5 class="card-title">${album.title}</h5>
@@ -479,132 +480,93 @@ $(document).ready(function() {
                             </div>
                         </div>
                     `).join('');
-                    $list.html(albumsHtml);
+                    $apiAlbumList.html(albumsHtml);
                 } else {
-                    $loading.show().html('<p class="text-secondary">Could not load top albums.</p>');
+                    $apiAlbumList.parent().html('<p class="text-secondary">Could not load albums.</p>');
                 }
             },
             error: function() {
-                $loading.show().html('<p class="text-danger">Error fetching albums from Deezer.</p>');
+                $('#api-album-list-loading').hide();
+                $apiAlbumList.parent().html('<p class="text-danger">Error: Could not connect to the API. Please try again later.</p>');
             }
         });
     }
 
-    function handleApiSearch(event) {
-        event.preventDefault();
-        const query = $('#search-input').val().trim();
-        if (query === '') {
-            showCustomMessage('Please enter a search term.');
-            return;
-        }
+    const $apiSearchForm = $('#api-search-form');
+    const $searchInput = $('#search-input');
+    const $searchResultsContainer = $('#api-search-results');
+    const $searchLoading = $('#api-search-loading');
+    const $searchPlaceholder = $('#api-search-placeholder');
+    const $searchResultsHeading = $('#search-results-heading');
 
+    function performSearch(query) {
+        if (!query) return;
+
+        $searchLoading.show();
+        $searchPlaceholder.hide();
+        $searchResultsContainer.empty();
+        $searchResultsHeading.show().text(`Search Results for "${query}"`);
         localStorage.setItem('lastSearchQuery', query);
 
-        const $results = $('#api-search-results');
-        const $loading = $('#api-search-loading');
-        const $placeholder = $('#api-search-placeholder');
-        const $heading = $('#search-results-heading');
-
-        $results.empty();
-        $placeholder.hide();
-        $loading.show();
-        $heading.text(`Search results for "${query}"`).show();
-
         $.ajax({
-            url: `${DEEZER_API_URL}/search?q=${encodeURIComponent(query)}&output=jsonp`,
-            dataType: 'jsonp',
+            url: `${PROXY_URL}${API_BASE_URL}search?q=${encodeURIComponent(query)}`,
+            method: 'GET',
+            dataType: 'json',
             success: function(response) {
-                $loading.hide();
+                $searchLoading.hide();
                 if (response.data && response.data.length > 0) {
-                    const resultsHtml = response.data.slice(0, 18).map(track => `
-                        <div class="col">
-                            <div class="card h-100 api-album-card">
-                                <img src="${track.album.cover_medium}" class="card-img-top" alt="${track.title}">
+                    const resultsHtml = response.data.map(item => `
+                        <div class="col api-album-card">
+                            <div class="card h-100">
+                                <img src="${item.album.cover_medium}" class="card-img-top" alt="${item.title}">
                                 <div class="card-body">
-                                    <h5 class="card-title">${track.title}</h5>
-                                    <p class="card-text">${track.artist.name}</p>
-                                    <small class="text-secondary d-block">${track.album.title}</small>
+                                    <h5 class="card-title">${item.title}</h5>
+                                    <p class="card-text">${item.artist.name}</p>
                                 </div>
                             </div>
                         </div>
                     `).join('');
-                    $results.html(resultsHtml);
+                    $searchResultsContainer.html(resultsHtml);
                 } else {
-                    $placeholder.text(`No results found for "${query}".`).show();
+                    $searchPlaceholder.text(`No results found for "${query}".`).show();
                 }
             },
             error: function() {
-                $loading.hide();
-                $placeholder.text('Error searching. Please try again.').show();
+                $searchLoading.hide();
+                $searchPlaceholder.text('Error: Could not connect to the API.').show();
             }
         });
     }
 
-    $('#api-search-form').on('submit', handleApiSearch);
-
-    function fetchTracksByGenre(genre) {
-        if (!genre) return;
-
-        const $results = $('#api-search-results');
-        const $loading = $('#api-search-loading');
-        const $placeholder = $('#api-search-placeholder');
-        const $heading = $('#search-results-heading');
-
-        $results.empty();
-        $placeholder.hide();
-        $loading.show();
-        $heading.text(`Top ${genre} Tracks`).show();
-
-        $('html, body').animate({
-            scrollTop: $heading.offset().top - 80
-        }, 500);
-
-        const searchUrl = `${DEEZER_API_URL}/search?q=genre:"${encodeURIComponent(genre)}"&output=jsonp`;
-
-        $.ajax({
-            url: searchUrl,
-            dataType: 'jsonp',
-            success: function(response) {
-                $loading.hide();
-                if (response.data && response.data.length > 0) {
-                    const resultsHtml = response.data.slice(0, 18).map(track => `
-                        <div class="col">
-                            <div class="card h-100 api-album-card">
-                                <img src="${track.album.cover_medium}" class="card-img-top" alt="${track.title}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${track.title}</h5>
-                                    <p class="card-text">${track.artist.name}</p>
-                                    <small class="text-secondary d-block">${track.album.title}</small>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                    $results.html(resultsHtml);
-                } else {
-                    $placeholder.text(`No results found for genre "${genre}".`).show();
-                }
-            },
-            error: function() {
-                $loading.hide();
-                $placeholder.text('Error fetching genre tracks. Please try again.').show();
-            }
-        });
-    }
-
-    $('#category-list').on('click', '.genre-card-btn', function() {
-        const genre = $(this).data('genre');
-        fetchTracksByGenre(genre);
-    });
-
-    function loadLastSearch() {
-        const $searchInput = $('#search-input');
-        if ($searchInput.length) {
-            const lastSearch = localStorage.getItem('lastSearchQuery');
-            if (lastSearch) {
-                $searchInput.val(lastSearch);
-            }
+    if ($apiSearchForm.length) {
+        const lastSearch = localStorage.getItem('lastSearchQuery');
+        if (lastSearch) {
+            $searchInput.val(lastSearch);
+            performSearch(lastSearch);
         }
+
+        $apiSearchForm.on('submit', function(event) {
+            event.preventDefault();
+            const query = $searchInput.val().trim();
+            performSearch(query);
+        });
+
+        $('.genre-card-btn').on('click', function() {
+            const genre = $(this).data('genre');
+            $searchInput.val(genre);
+            performSearch(genre);
+            $('html, body').animate({
+                scrollTop: $apiSearchForm.offset().top - 80
+            }, 500);
+        });
     }
+
+    $('#premium-plan-btn').on('click', function() {
+        showCustomMessage('Redirecting to Premium checkout...');
+    });
+    $('#family-plan-btn').on('click', function() {
+        showCustomMessage('Redirecting to Family Plan checkout...');
+    });
 
     $('.accordion-header').on('click', function() {
         const $item = $(this).parent('.accordion-item');
@@ -635,20 +597,6 @@ $(document).ready(function() {
         });
     }
 
-    const $dateTimeDisplay = $('#datetime-display');
-    function updateDateTime() {
-        if ($dateTimeDisplay.length) {
-            const now = new Date();
-            const time = now.toLocaleTimeString('en-EN', { hour: '2-digit', minute: '2-digit'});
-            const date = now.toLocaleDateString('en-EN', { month: 'short', day: 'numeric'});
-            $dateTimeDisplay.text(`${time} (${date})`);
-        }
-    }
-    if ($dateTimeDisplay.length) {
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
-    }
-
     const $scrollProgressBar = $('#scroll-progress-bar');
     if ($scrollProgressBar.length) {
         $(window).on('scroll', function() {
@@ -660,35 +608,6 @@ $(document).ready(function() {
         });
     }
 
-    function animateCounter($element) {
-        const target = parseInt($element.data('count'), 10);
-        $({ count: 0 }).animate({ count: target }, {
-            duration: 1500,
-            easing: 'swing',
-            step: function() { $element.text(Math.floor(this.count)); },
-            complete: function() { $element.text(this.count); }
-        });
-    }
-
-    const $counters = $('.animated-counter');
-    if ($counters.length) {
-        let triggered = false;
-        const $statsContainer = $('.stats-container');
-        const checkCountersInView = () => {
-            if (triggered || !$statsContainer.length) return;
-            const docViewTop = $(window).scrollTop();
-            const docViewBottom = docViewTop + $(window).height();
-            const elemTop = $statsContainer.offset().top;
-            if (elemTop <= docViewBottom - 50) {
-                $counters.each(function() { animateCounter($(this)); });
-                triggered = true;
-                $(window).off('scroll', checkCountersInView);
-            }
-        };
-        $(window).on('scroll', checkCountersInView);
-        checkCountersInView();
-    }
-
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -697,14 +616,17 @@ $(document).ready(function() {
     $('#copy-name-btn').on('click', function() {
         const $button = $(this);
         const textToCopy = $('#profile-name-text').text().trim();
+
         navigator.clipboard.writeText(textToCopy).then(() => {
             $button.find('i').replaceWith(feather.icons['check'].toSvg({ width: 16, height: 16 }));
             const tooltip = bootstrap.Tooltip.getInstance($button[0]);
             $button.attr('data-bs-original-title', 'Copied!').tooltip('show');
+
             setTimeout(() => {
                 $button.find('svg').replaceWith(feather.icons['copy'].toSvg({ width: 16, height: 16, class: 'copy-icon' }));
                 $button.attr('data-bs-original-title', 'Copy name').tooltip('hide');
             }, 2000);
+
         }).catch(err => {
             console.error('Failed to copy: ', err);
             showCustomMessage('Failed to copy text.');
@@ -716,6 +638,7 @@ $(document).ready(function() {
         const lazyLoadImages = () => {
             const docViewTop = $(window).scrollTop();
             const docViewBottom = docViewTop + $(window).height();
+
             $lazyImages.each(function() {
                 const $img = $(this);
                 if ($img.hasClass('loaded')) return;
@@ -732,11 +655,26 @@ $(document).ready(function() {
         lazyLoadImages();
     }
 
+    const $dateTimeDisplay = $('#datetime-display');
+    function updateDateTime() {
+        if ($dateTimeDisplay.length) {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-EN', { hour: '2-digit', minute: '2-digit'});
+            const date = now.toLocaleDateString('en-EN', { month: 'short', day: 'numeric'});
+            $dateTimeDisplay.text(`${time} (${date})`);
+        }
+    }
+    if ($dateTimeDisplay.length) {
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    }
+
     const $popupOverlay = $('#popup-overlay');
     $('#open-popup-btn').on('click', function(e) {
         e.preventDefault();
         $popupOverlay.css('display', 'flex');
     });
+
     const closePopup = () => $popupOverlay.hide();
     $('#popup-close-btn').on('click', closePopup);
     $popupOverlay.on('click', function(event) {
@@ -745,7 +683,6 @@ $(document).ready(function() {
     $('#popup-form').on('submit', function(e) {
         e.preventDefault();
         const $popupEmail = $('#popup-email');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if ($popupEmail.val().trim() !== '' && emailRegex.test($popupEmail.val())) {
             showCustomMessage('Thanks for subscribing!');
             closePopup();
@@ -755,24 +692,8 @@ $(document).ready(function() {
         }
     });
 
-    $('#premium-plan-btn').on('click', function() {
-        showCustomMessage('Redirecting to Premium checkout...');
-    });
-
-    $('#family-plan-btn').on('click', function() {
-        showCustomMessage('Redirecting to Family Plan checkout...');
-    });
-
     updateNavbar();
 
-    checkAuth();
+    feather.replace();
 
-    initGreeting();
-    initProfilePage();
-    initSettingsPage();
-    loadSavedRatings();
-    loadLastSearch();
-
-    fetchDeezerTopTracks();
-    fetchDeezerTopAlbums();
 });

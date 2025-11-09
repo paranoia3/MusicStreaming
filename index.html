@@ -33,7 +33,6 @@
                 <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
                     <i data-feather="sun"></i>
                 </button>
-                <!-- Auth links will be dynamically inserted here by main.js -->
                 <div id="auth-links" class="d-flex align-items-center"></div>
             </div>
         </div>
@@ -44,15 +43,6 @@
 
     <h1 id="greeting-display">Listen anywhere, anytime!</h1>
     <p class="text-secondary">Here's what we've picked for you today.</p>
-
-    <!-- This section is replaced by the API-driven list below -->
-    <!-- <div class="mb-4">
-        <div class="input-group" style="max-width: 300px;">
-            <input type="text" class="form-control" id="user-name-input" placeholder="Enter your name">
-            <button class="btn btn-gradient" id="name-submit-btn">Update Greeting</button>
-        </div>
-        <small class="text-secondary">Enter your name above to personalize the greeting!</small>
-    </div> -->
 
     <a href="subscription.html" id="open-popup-btn" class="btn btn-lg btn-gradient mt-3">Subscribe to news</a>
 
@@ -103,7 +93,6 @@
         <h2>Rate this month's featured artist: Imagine Dragons</h2>
         <div class="d-flex align-items-center gap-3">
             <img src="images/imagine_dragons.webp" class="rounded-circle" alt="Imagine Dragons" style="width: 80px; height: 80px; object-fit: cover;">
-            <!-- Updated star-rating to include a unique ID for saving -->
             <div class="star-rating" data-item-id="artist-imagine-dragons">
                 <span class="star" data-value="1">★</span>
                 <span class="star" data-value="2">★</span>
@@ -116,7 +105,6 @@
 
     <section class="mt-5">
         <h2>Today's Top Tracks (from Deezer)</h2>
-        <!-- Container for API-loaded tracks -->
         <div id="api-track-list-loading" class="text-center">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -124,7 +112,6 @@
             <p class="text-secondary mt-2">Loading top tracks...</p>
         </div>
         <ul class="list-group list-group-flush" id="api-track-list">
-            <!-- API results will be injected here by main.js -->
         </ul>
     </section>
 
