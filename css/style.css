@@ -68,6 +68,16 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
 
+/* Fix for light theme navbar toggler */
+.light-theme .navbar-dark .navbar-toggler {
+    color: var(--text-primary);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+.light-theme .navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
 .card {
     background-color: var(--card-color);
     border: none;
@@ -86,17 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 .card-img-top {
     border-radius: 8px;
     padding: 15px;
-    /* Added for API images */
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
 }
-
-/* Specific for API cards to not have padding */
-.api-album-card .card-img-top {
-    padding: 0;
-    border-radius: 12px 12px 0 0;
-}
-
 
 .card-body {
     color: var(--text-primary);
@@ -105,22 +105,42 @@ h1, h2, h3, h4, h5, h6 {
 .card-title {
     font-weight: bold;
     margin-bottom: 5px;
-    /* Ellipsis for long titles */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-/* Make email in settings readonly */
-.form-control[readonly] {
-    background-color: var(--card-color);
-    opacity: 0.7;
+.card-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
-/* Make genre cards clickable */
-.genre-card-btn {
-    cursor: pointer;
+/* --- Search Input Fix --- */
+.form-control, .form-select, span.input-group-text {
+    background-color: var(--hover-color);
+    border: 1px solid #444444; /* Visible border for dark theme */
+    color: var(--text-primary);
+    border-radius: 8px;
+    transition: background-color 0.5s, border-color 0.5s;
 }
+.light-theme .form-control, .light-theme .form-select, .light-theme span.input-group-text {
+    background-color: #F7F7F7;
+    border: 1px solid #CCCCCC;
+    color: var(--text-primary); /* Explicitly set text color for light theme */
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--hover-color);
+    color: var(--text-primary);
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 0.25rem rgba(167, 85, 222, 0.25);
+}
+.light-theme .form-control:focus, .light-theme .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(106, 13, 173, 0.25);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+}
+/* --- End Search Input Fix --- */
+
 
 .search-bar {
     border-top-left-radius: 0;
@@ -133,26 +153,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-gradient {
     background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
-    color: #FFFFFF; /* Changed from var(--text-primary) to #FFFFFF */
+    color: #FFFFFF; /* Always white text */
     border: none;
     font-weight: bold;
     transition: opacity 0.3s;
 }
 .btn-gradient:hover {
-    color: #FFFFFF; /* Changed from var(--text-primary) to #FFFFFF */
+    color: #FFFFFF; /* Always white text on hover */
     opacity: 0.9;
 }
-
-.btn-outline-secondary {
-    color: var(--text-secondary);
-    border-color: var(--text-secondary);
-}
-.btn-outline-secondary:hover {
-    color: var(--text-primary);
-    background-color: var(--text-secondary);
-    border-color: var(--text-secondary);
-}
-
 
 #contact-submit-btn .spinner-border-sm {
     margin-right: 5px;
@@ -165,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.5s;
 }
 
-/* Styles for Login/Signup Forms */
+/* Authentication form styles */
 .auth-form-container {
     max-width: 500px;
     margin: 2rem auto;
@@ -176,6 +185,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 .auth-link:hover {
+    color: var(--accent-pink);
     text-decoration: underline;
 }
 
@@ -201,11 +211,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .track-info .track-title {
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-info .track-artist, .track-album, .track-duration {
     color: var(--text-secondary);
     font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 h1 { font-size: 2rem; }
@@ -233,9 +249,6 @@ h2 { font-size: 1.5rem; }
 }
 .form-control.is-invalid {
     border-color: var(--accent-pink);
-}
-.form-control.is-invalid:focus {
-    box-shadow: 0 0 0 0.25rem rgba(244, 81, 168, 0.25);
 }
 
 .star-rating {
@@ -359,14 +372,12 @@ h2 { font-size: 1.5rem; }
     line-height: 1;
 }
 
-/* New Footer Style */
+/* Updated Footer Style */
 .main-footer {
     background-color: var(--sidebar-color);
     color: var(--text-secondary);
-    border-top: 1px solid var(--hover-color);
-    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+    transition: background-color 0.5s, color 0.5s;
 }
-
 
 .footer-info {
     display: flex;
@@ -399,7 +410,7 @@ h2 { font-size: 1.5rem; }
     border-bottom-right-radius: 4px;
 }
 
-/* Removed autocomplete styles */
+/* Removed Autocomplete styles as it was replaced by API search */
 
 .highlight {
     background-color: var(--accent-purple);
@@ -458,4 +469,23 @@ h2 { font-size: 1.5rem; }
 }
 .profile-link:hover {
     color: var(--accent-purple);
+}
+
+/* API Card Styles */
+.api-album-card .card-title {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.api-album-card .card-text {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Clickable Genre Card */
+.genre-card-btn {
+    cursor: pointer;
 }
