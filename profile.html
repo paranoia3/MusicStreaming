@@ -33,6 +33,7 @@
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle day and night theme">
           <i data-feather="sun"></i>
         </button>
+        <!-- Auth links will be dynamically inserted here by main.js -->
         <div id="auth-links" class="d-flex align-items-center"></div>
       </div>
     </div>
@@ -40,16 +41,19 @@
 </nav>
 
 <main class="container-fluid p-3 p-sm-4 p-md-5">
+  <!-- This header will be populated by main.js -->
   <header class="d-flex flex-column flex-md-row align-items-center text-center text-md-start gap-4 mb-5">
     <img src="https://placehold.co/150x150/6B0F9C/FFFFFF?text=A" id="profile-avatar" alt="Avatar" class="rounded-circle">
     <div>
       <p class="text-secondary mb-1">Profile</p>
       <div class="d-flex align-items-center gap-3">
+        <!-- Name is now dynamic -->
         <h1 id="profile-name-text">Loading...</h1>
         <button class="btn btn-outline-secondary btn-sm" id="copy-name-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy name">
           <i data-feather="copy" class="copy-icon"></i>
         </button>
       </div>
+      <!-- Email is now dynamic -->
       <p class="text-secondary fs-5 mt-1" id="profile-email-text">Loading email...</p>
 
       <div class="d-flex gap-4 justify-content-center justify-content-md-start mt-3 stats-container">
@@ -85,7 +89,7 @@
   </section>
 </main>
 
-<footer class="bg-black text-secondary text-center p-4 mt-auto">
+<footer class="main-footer text-center p-4 mt-auto">
   <div class="footer-info">
     <p class="mb-0">&copy; 2025 Yerkegali Yergali, Dameli Taubasar, Begimzhan Bitore</p>
     <div id="datetime-display" class="datetime-display"></div>

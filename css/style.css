@@ -86,14 +86,17 @@ h1, h2, h3, h4, h5, h6 {
 .card-img-top {
     border-radius: 8px;
     padding: 15px;
+    /* Added for API images */
     aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
+/* Specific for API cards to not have padding */
 .api-album-card .card-img-top {
     padding: 0;
     border-radius: 12px 12px 0 0;
 }
+
 
 .card-body {
     color: var(--text-primary);
@@ -102,16 +105,19 @@ h1, h2, h3, h4, h5, h6 {
 .card-title {
     font-weight: bold;
     margin-bottom: 5px;
+    /* Ellipsis for long titles */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* Make email in settings readonly */
 .form-control[readonly] {
     background-color: var(--card-color);
     opacity: 0.7;
 }
 
+/* Make genre cards clickable */
 .genre-card-btn {
     cursor: pointer;
 }
@@ -127,13 +133,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-gradient {
     background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
-    color: #FFFFFF;
+    color: #FFFFFF; /* Changed from var(--text-primary) to #FFFFFF */
     border: none;
     font-weight: bold;
     transition: opacity 0.3s;
 }
 .btn-gradient:hover {
-    color: #FFFFFF;
+    color: #FFFFFF; /* Changed from var(--text-primary) to #FFFFFF */
     opacity: 0.9;
 }
 
@@ -147,6 +153,7 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--text-secondary);
 }
 
+
 #contact-submit-btn .spinner-border-sm {
     margin-right: 5px;
 }
@@ -158,6 +165,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.5s;
 }
 
+/* Styles for Login/Signup Forms */
 .auth-form-container {
     max-width: 500px;
     margin: 2rem auto;
@@ -351,6 +359,15 @@ h2 { font-size: 1.5rem; }
     line-height: 1;
 }
 
+/* New Footer Style */
+.main-footer {
+    background-color: var(--sidebar-color);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--hover-color);
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+}
+
+
 .footer-info {
     display: flex;
     flex-direction: column;
@@ -381,6 +398,8 @@ h2 { font-size: 1.5rem; }
     transition: width 0.1s ease-out;
     border-bottom-right-radius: 4px;
 }
+
+/* Removed autocomplete styles */
 
 .highlight {
     background-color: var(--accent-purple);
